@@ -1,0 +1,193 @@
+set nocompatible
+let s:cpo_save=&cpo
+set cpo&vim
+map! <xHome> <Home>
+map! <xEnd> <End>
+map! <S-xF4> <S-F4>
+map! <S-xF3> <S-F3>
+map! <S-xF2> <S-F2>
+map! <S-xF1> <S-F1>
+map! <xF4> <F4>
+map! <xF3> <F3>
+map! <xF2> <F2>
+map! <xF1> <F1>
+nmap <silent> \sl <Plug>SpellChangeLanguage
+nmap <silent> \s? <Plug>SpellProposeAlternatives
+nmap <silent> \sA <Plug>SpellAutoEnable
+nmap <silent> \ss <Plug>SpellCheck
+map \mbt <Plug>TMiniBufExplorer
+map \mbu <Plug>UMiniBufExplorer
+map \mbc <Plug>CMiniBufExplorer
+map \mbe <Plug>MiniBufExplorer
+nmap \cwr <Plug>CVSWatchRemove
+nmap \cwf <Plug>CVSWatchOff
+nmap \cwn <Plug>CVSWatchOn
+nmap \cwa <Plug>CVSWatchAdd
+nmap \cwv <Plug>CVSWatchers
+nmap \cv <Plug>CVSVimDiff
+nmap \cu <Plug>CVSUpdate
+nmap \ct <Plug>CVSUnedit
+nmap \cs <Plug>CVSStatus
+nmap \cr <Plug>CVSReview
+nmap \cq <Plug>CVSRevert
+nmap \cl <Plug>CVSLog
+nmap \cg <Plug>CVSGotoOriginal
+nmap \ci <Plug>CVSEditors
+nmap \ce <Plug>CVSEdit
+nmap \cd <Plug>CVSDiff
+nmap \cc <Plug>CVSCommit
+nmap \cG <Plug>CVSClearAndGotoOriginal
+nmap \cn <Plug>CVSAnnotate
+nmap \ca <Plug>CVSAdd
+nnoremap <silent> <Plug>SpellMenuAlternatives :SpellMenuAlternatives
+nnoremap <silent> <Plug>SpellProposeAlternatives :SpellProposeAlternatives
+nnoremap <silent> <Plug>SpellAutoDisable :SpellAutoDisable
+nnoremap <silent> <Plug>SpellAutoEnable :SpellAutoEnable
+nnoremap <silent> <Plug>SpellChangeLanguage :SpellChangeLanguage
+nnoremap <silent> <Plug>SpellExit :SpellExit
+nnoremap <silent> <Plug>SpellCheckLine :SpellCheckLine
+nnoremap <silent> <Plug>SpellCheck :SpellCheck
+nnoremap <silent> <Plug>CVSWatchRemove :CVSWatchRemove
+nnoremap <silent> <Plug>CVSWatchOff :CVSWatchOff
+nnoremap <silent> <Plug>CVSWatchOn :CVSWatchOn
+nnoremap <silent> <Plug>CVSWatchAdd :CVSWatchAdd
+nnoremap <silent> <Plug>CVSWatchers :CVSWatchers
+nnoremap <silent> <Plug>CVSVimDiff :CVSVimDiff
+nnoremap <silent> <Plug>CVSUpdate :CVSUpdate
+nnoremap <silent> <Plug>CVSUnedit :CVSUnedit
+nnoremap <silent> <Plug>CVSStatus :CVSStatus
+nnoremap <silent> <Plug>CVSReview :CVSReview
+nnoremap <silent> <Plug>CVSRevert :CVSRevert
+nnoremap <silent> <Plug>CVSLog :CVSLog
+nnoremap <silent> <Plug>CVSClearAndGotoOriginal :CVSGotoOriginal!
+nnoremap <silent> <Plug>CVSGotoOriginal :CVSGotoOriginal
+nnoremap <silent> <Plug>CVSEditors :CVSEditors
+nnoremap <silent> <Plug>CVSEdit :CVSEdit
+nnoremap <silent> <Plug>CVSDiff :CVSDiff
+nnoremap <silent> <Plug>CVSCommit :CVSCommit
+nnoremap <silent> <Plug>CVSAnnotate :CVSAnnotate
+nnoremap <silent> <Plug>CVSAdd :CVSAdd
+map <xHome> <Home>
+map <xEnd> <End>
+map <S-xF4> <S-F4>
+map <S-xF3> <S-F3>
+map <S-xF2> <S-F2>
+map <S-xF1> <S-F1>
+map <xF4> <F4>
+map <xF3> <F3>
+map <xF2> <F2>
+map <xF1> <F1>
+let &cpo=s:cpo_save
+unlet s:cpo_save
+set autochdir
+set autowrite
+set background=dark
+set backspace=2
+set noequalalways
+if &filetype != 'perl'
+set filetype=perl
+endif
+set iminsert=0
+set listchars=tab:>-,trail:-,eol:@
+set mouse=a
+set ruler
+set termencoding=utf-8
+set updatetime=2000
+set wrapmargin=8
+let s:so_save = &so | let s:siso_save = &siso | set so=0 siso=0
+let v:this_session=expand("<sfile>:p")
+silent only
+cd ~/
+set shortmess=aoO
+silent! argdel *
+set splitbelow splitright
+set nosplitbelow
+set nosplitright
+wincmd t
+set winheight=1 winwidth=1
+argglobal
+enew
+setlocal noautoindent
+setlocal autoread
+setlocal nobinary
+setlocal bufhidden=
+setlocal buflisted
+setlocal buftype=
+setlocal nocindent
+setlocal cinkeys=0{,0},0),:,0#,!^F,o,O,e
+setlocal cinoptions=
+setlocal cinwords=if,else,while,do,for,switch
+setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
+setlocal commentstring=/*%s*/
+setlocal complete=.,w,b,u,t,i
+setlocal nocopyindent
+setlocal define=
+setlocal dictionary=
+setlocal nodiff
+setlocal equalprg=
+setlocal errorformat=
+setlocal noexpandtab
+if &filetype != ''
+setlocal filetype=
+endif
+set foldcolumn=2
+setlocal foldcolumn=2
+setlocal foldenable
+setlocal foldexpr=0
+setlocal foldignore=#
+setlocal foldlevel=0
+setlocal foldmarker={{{,}}}
+set foldmethod=syntax
+setlocal foldmethod=syntax
+setlocal foldminlines=1
+setlocal foldnestmax=20
+setlocal foldtext=foldtext()
+setlocal formatoptions=tcq
+setlocal grepprg=
+setlocal iminsert=0
+setlocal imsearch=2
+setlocal include=
+setlocal includeexpr=
+setlocal indentexpr=
+setlocal indentkeys=0{,0},:,0#,!^F,o,O,e
+setlocal noinfercase
+setlocal iskeyword=@,48-57,_,192-255
+setlocal keywordprg=
+setlocal nolinebreak
+setlocal nolisp
+set list
+setlocal list
+setlocal makeprg=
+setlocal matchpairs=(:),{:},[:]
+setlocal modeline
+setlocal modifiable
+setlocal nrformats=octal,hex
+set number
+setlocal number
+setlocal path=
+setlocal nopreserveindent
+setlocal nopreviewwindow
+setlocal noreadonly
+setlocal noscrollbind
+setlocal shiftwidth=8
+setlocal noshortname
+setlocal nosmartindent
+setlocal softtabstop=0
+setlocal suffixesadd=
+setlocal swapfile
+if &syntax != ''
+setlocal syntax=
+endif
+setlocal tabstop=8
+setlocal tags=
+setlocal textwidth=0
+setlocal thesaurus=
+setlocal nowinfixheight
+setlocal wrap
+setlocal wrapmargin=8
+set winheight=1 winwidth=20 shortmess=filnxtToO
+let s:sx = expand("<sfile>:p:r")."x.vim"
+if file_readable(s:sx)
+  exe "source " . s:sx
+endif
+let &so = s:so_save | let &siso = s:siso_save

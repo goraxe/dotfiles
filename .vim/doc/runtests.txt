@@ -1,0 +1,110 @@
+*runtests*                         Run Tests                     July 15, 2007
+
+Run Tests                                                          *run-tests*
+
+                              Plugin version 1.0.0
+                          for Vim version 6.0 and above
+                         Kent Cowgill  <kent@c2group.net>
+
+Run Tests implements a convenient way to create test stubs for Perl files.
+
+1. Generate Test Stub                             |runtests-generate-test|
+2. Split Test Window                              |runtests-split|
+3. Run Tests                                      |runtests-run|
+4. Generate Makefile                              |runtests-generate-makefile|
+4.1 Running Makefile Tests                        |runtests-makefile-test|
+4.2 Running Verbose Makefile Tests                |runtests-makefile-verbose|
+4.3 Running Shuffled Makefile Tests               |runtests-makefile-shuffle|
+4.4 Running Devel::Cover                          |runtests-makefile-cover|
+4.5 Miscellaneous Makefile Commands               |runtests-makefile-misc|
+
+==============================================================================
+1. GENERATE TEST STUB                                 *runtests-generate-test*
+==============================================================================
+
+This command first checks to see if a test file for the current file already
+exists.  If it does, it does nothing.  If it doesn't, it creates it, parses
+through your perl source code looking for package and subroutine declarations.
+Upon finding them, attempts to intelligently create testing stubs for calling
+the various subroutines it finds.
+
+In a module (.pm) file, it looks for a new() constructor and adds a special
+test to create an object of that package, adds an isa_ok() for the created
+object, and every subroutine that it finds is called as an method on that
+object.
+
+In a normal perl file (.pl), calls all subroutines as functions in ok() calls.
+
+By default, the key mapping for this function is ",g".
+
+==============================================================================
+2. SPLIT TEST WINDOW                                          *runtests-split*
+==============================================================================
+
+This is a quick key combination to bring up a buffer, split in your current
+view at the bottom, of the test file for the file you're editing.  By default,
+this buffer is 8 lines high, but you can change this behavior by setting
+"g:testWindowSize" in your .vimrc file.  For example, to set this default to
+be 12 lines high:
+
+  :let g:testWindowSize=12
+
+By default, the key mapping to bring up the split view is ",s".
+
+==============================================================================
+3. RUN TESTS                                                    *runtests-run*
+==============================================================================
+
+This is a quick key combination to run prove on the test file for the file
+you're editing.
+
+By default, the key mapping is ",r".
+
+==============================================================================
+4. GENERATE MAKEFILE                              *runtests-generate-makefile*
+==============================================================================
+
+This creates a general purpose Makefile suitable for running tests,
+Devel::Cover, and the coverage report for the file you're editing and it's
+associated test file.
+
+By default, the key mapping to generate the Makefile is ",m".
+
+==============================================================================
+4.1 Running Makefile Tests                            *runtests-makefile-test*
+
+This runs "make test", which by default runs "prove t/".  The default key
+mapping to run this is ",mt".
+
+==============================================================================
+4.2 Running Verbose Makefile Tests                 *runtests-makefile-verbose*
+
+This runs "make vtest", which by default runs "prove -v t/".  The default key
+mapping to run this is ",mv".
+
+==============================================================================
+4.3 Running Shuffled Makefile Tests                *runtests-makefile-shuffle*
+
+This runs "make shuffle", which by default runs "prove -s t/".  The default
+key mapping to run this is ",ms".
+
+==============================================================================
+4.4 Running Devel::Cover                             *runtests-makefile-cover*
+
+This runs "make cover", which by default runs "make clean", runs the test file
+through Devel::Cover, runs the "cover" program, and opens (hopefully) the code
+coverage report in your web browser.  The default key mapping to run this is
+",mc".
+
+==============================================================================
+4.5 Miscellaneous Makefile Commands                   *runtests-makefile-misc*
+
+Also available in the Makefile:
+
+",ml" - make clean.  Deletes the code coverage database.  Used from "make
+        cover", but could be useful on its own.
+",mr" - make report.  Opens the code coverage report in your browser.  Used
+        from "make cover", but could be useful on its own.
+
+==============================================================================
+vim:tw=78:noet:ts=2:ft=help:norl:
