@@ -1,0 +1,15 @@
+#! /bin/sh
+now=`date`
+
+echo "`date` running release_sign in `pwd` " >> /tmp/log
+
+if [ -e "Release.gpg" ]; then
+	echo "`date` removing previous key" >> /tmp/log
+	rm -f Release.gpg
+fi
+
+echo "`date` generating signed key" >> /tmp/log
+gpg --no-tty --batch --detach-sign --armor --output Release.gpg  $1 2>&1 >> /tmp/log
+
+echo "`date` done" >> /tmp/log
+exit 0;

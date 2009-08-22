@@ -1,0 +1,16 @@
+#!/bin/bash
+# vim: ft=sh
+
+# if we have an argument then treat is as the log file
+echo $1
+if [[ -z $1 ]]; then
+	LOG=/var/log/apache2/access.log
+else
+	if [[ -e $1 ]]; then
+		LOG=$1
+	else
+		LOG=/var/log/apache2/$1
+	fi
+fi
+
+tail -f $LOG | logresolve

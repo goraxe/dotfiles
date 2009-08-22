@@ -1,0 +1,10 @@
+#!/bin/bash
+# vim: ft=sh
+
+# build a list of the current logs
+for ALOG in /var/log/apache2/*access.log
+do
+	LOGS="${LOGS} -f $ALOG"
+done
+
+/usr/sbin/apachetop $LOGS

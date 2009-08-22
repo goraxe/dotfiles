@@ -1,0 +1,95 @@
+#!/bin/bash
+
+#################################################################################
+#							INCLUDES
+#################################################################################
+
+source ~/bin/functions.sh
+
+#################################################################################
+#							GLOBALS
+#################################################################################
+
+PROJECT_DIR="${HOME}/projects/"
+
+safe_mkdir "${PROJECT_DIR}"
+
+VERBOSE=1
+DRY_RUN=0
+#################################################################################
+#							FUNCTIONS
+#################################################################################
+function usage {
+cat << EOT
+`basename $0`: [project]
+	creates [project] directory and sets up default files and directory structure
+EOT
+	exit 0
+}
+
+function parse_cmdline {
+	say "parsing cmdline"
+	TEMP=`getopt -o vdqm --long verbose,dry-run,module:,quite \
+		 -n 'mk_project' -- "$@"`
+
+	if [ $? != 0 ] ; then die "Could not parse cmdline"; fi
+
+	eval set -- "$TEMP"
+	while true ; do
+		case "$1" in
+			-v|--verbose)
+				VERBOSE=1
+				shift
+			;;
+			-d|--dry-run) 
+				DRY_RUN=1
+				shift
+			;;
+			-q|--quite) 
+				VERBOSE=0
+				shift
+			;;
+			-m|--module)
+				shift
+				say "adding module $1"
+				MODULE+=$1
+				shift
+			;;
+			--) 
+				shift
+				for i in $@; do
+					if [[ ! -z ${PROJECT} ]]; then 
+						die "can only create one project at a time $i ${PROJECT}"
+					fi
+					PROJECT=$i
+				done
+				break
+			;;
+			*)
+				say $@
+				echo "Internal error!" ; exit 1 
+			;;
+		esac
+	done
+}
+#################################################################################
+#							MAIN
+#################################################################################
+
+parse_cmdline $@
+
+if [[ -z ${PROJECT} ]]; then
+	usage
+fi
+
+PROJECT_DIR+="${PROJECT}/"
+PROJECT_DIRS="config config/live config/dev tags scripts"
+safe_mkdir "${PROJECT_DIR}"
+for i in ${PROJECT_DIRS}; do
+	safe_mkdir "${PROJECT_DIR}${i}"
+done
+
+cmd_ms=" module-starter --mb --module $MODULE --dir \"${PROJECT_DIR}trunk\""
+echo $cmd_ms
+$cmd_ms
+#module-starter --mb --module $MODULE --dir "${PROJECT_DIR}trunk"

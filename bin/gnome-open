@@ -1,0 +1,29 @@
+#!/usr/bin/perl
+use strict;
+use URI;
+open STDERR, ">>", "/tmp/log";
+
+eval {
+	my $uri = URI->new($ARGV[0]);
+	my $host = $uri->host;
+	warn "attemting to open browser for $host";
+	die unless $host;
+	if ($host !~ /\./) {
+		foreach my $domain (qw(green yellow red)) {
+			my $thing = "$host.$domain.sophos";
+			if (gethostbyname($thing)) {
+				warn "Setting host to $thing";
+				$uri->host($thing);
+				last;
+			}
+		}
+	}
+	if ($uri->host() =~ /\.yellow\.sophos$/) {
+		warn "going for smailholm.yellow.sophos";
+		exec('/usr/bin/ssh','-p','3389','-X','smailholm.yellow.sophos','gnome-open',quotemeta($uri->as_string));
+	}
+	if ($uri->host() =~ /\.red\.sophos$/) {
+		exec('/usr/bin/ssh','-X','douglas.red.sophos','gnome-open',quotemeta($uri->as_string));
+	}
+};
+exec('/usr/bin/gnome-open',@ARGV);

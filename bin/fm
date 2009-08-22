@@ -1,0 +1,12 @@
+#!/usr/bin/perl
+
+use strict;
+use warnings;
+
+use Module::Find;
+
+
+foreach (@ARGV) {
+	my @mods = findallmod $_;
+	print map { "$_\n" } @mods;
+} 
