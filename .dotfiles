@@ -1,0 +1,14 @@
+#
+
+
+VCS_UPDATE_CMD="git pull"
+VCS_COMMIT_CMD="git commit -a"
+VCS_CREATE_CMD="git clone"
+
+
+VCS_LOCATION="git://git/dotfiles"
+VCS_LOCATION_HOME="git://git/dotfiles"
+
+CHECKOUT_HOME="${HOME}/dotfiles"
+
+VCS_DIRS="HOME"
