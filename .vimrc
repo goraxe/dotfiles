@@ -15,7 +15,7 @@ endif
 set number
 
 " display
-set columns=80
+" set columns=80
 set background=dark
 colorscheme desert
 highlight Folded guibg=grey50 guifg=blue
@@ -33,6 +33,7 @@ set listchars=tab:>-,trail:-,eol:@
 	
 	" TagList
 	let Tlist_Close_On_Select			= 1
+let Tlist_Auto_Open = 0
 	let Tlist_Display_Prototype			= 1
 	let Tlist_File_Fold_Auto_Close		= 1
 	let Tlist_GainFocus_On_ToggleOpen	= 1
@@ -62,8 +63,6 @@ set listchars=tab:>-,trail:-,eol:@
 	if has("win32")
 	else 
 	"linux
-		let g:dbext_default_profile_scanners = 'type:DBI:ODBC:database=scanners;driver=FreeTDS;server=uk-virussql3.yellow.sophos;UID=perlscanners;PWD=5r3Nnac5'
-		let g:dbext_default_profile_filesdb = 'type:DBI:ODBC:database=filesdb;driver=FreeTDS;server=uk-virussql3.yellow.sophos;UID=perl;PWD=perl'
 	endif
 
 " functions
