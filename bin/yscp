@@ -1,0 +1,4 @@
+#!/bin/bash
+
+scp -P 3389 $1 smailholm.yellow.sophos:incoming/
+

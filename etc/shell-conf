@@ -1,0 +1,15 @@
+# vim: ft=sh
+
+if [[ `hostname` == "yar" ]]; then
+	SVN_LOCATION="http://localhost/svn/home/${USER}/trunk"
+elif [[ `hostname` == "viruslab-6"  ]]; then
+	SVN_LOCATION="svn://svn.yellow.sophos/home/trunk/${USER}"
+else
+	true
+#	SVN_LOCATION="http://smailholm:8080/svn/home/${USER}/trunk"
+#	SVN_LOCATION_USER="http://smailholm:8080/svn/home/${USER}/trunk"
+#	SVN_LOCATION_BIN="http://smailholm:8080/svn/home/${USER}/trunk/bin"
+fi
+
+
+

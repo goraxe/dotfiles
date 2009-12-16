@@ -8,9 +8,10 @@ if [[ -z $1 ]]; then
 else
 	if [[ -e $1 ]]; then
 		LOG=$1
+		shift
 	else
 		LOG=/var/log/apache2/$1
 	fi
 fi
 
-tail -f $LOG | logresolve
+tail -f $LOG $@| logresolve

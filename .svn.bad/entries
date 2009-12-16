@@ -1,0 +1,136 @@
+8
+
+dir
+37
+http://smailholm:8080/svn/home/goraxe/trunk
+http://smailholm:8080/svn
+
+
+
+2008-12-10T11:11:03.831827Z
+37
+
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+7b32a913-cab7-4fd2-9de3-ed2639998b9e
+
+.bashrc
+file
+
+
+
+
+2008-09-18T11:09:27.000000Z
+a92b7fab460a0382f576f3f7bcaea531
+2008-09-17T12:53:00.345888Z
+12
+
+.vimoutlinerrc
+file
+
+
+
+
+2008-09-17T10:50:15.000000Z
+d003af205b95232e486f700224f936d8
+2008-09-10T16:27:52.393810Z
+7
+
+has-props
+
+.screenrc
+file
+
+
+
+
+2008-08-29T10:28:41.000000Z
+c8288b3fa97d3c42eb7e8c54deff8882
+2008-08-28T15:21:34.757031Z
+5
+
+.bash_login
+file
+
+
+
+
+2008-09-17T10:50:15.000000Z
+6506a3ec07dfebaf23ac051d24c88e8a
+2008-09-17T08:51:48.244997Z
+9
+
+has-props
+
+.bash_logout
+file
+
+
+
+
+2008-09-17T10:50:15.000000Z
+963cd1463514babcd41946965e854b60
+2008-09-17T08:28:26.603817Z
+8
+
+.toprc
+file
+
+
+
+
+2008-09-18T11:09:27.000000Z
+c8e546385a15bef78e39ce841c4d8e14
+2008-09-18T10:40:27.053774Z
+13
+
+.module-starter
+dir
+
+
+
+add
+
+bin
+dir
+
+.vim
+dir
+
+.bash_profile
+file
+
+
+
+
+2008-10-24T13:30:00.000000Z
+ae3f483d06ef8da1c4f46fa5bb60ea21
+2008-10-24T12:42:34.177750Z
+22
+
+.vimoutliner
+dir
+
+.vimrc
+file
+
+
+
+
+2008-11-26T17:05:34.000000Z
+d6ade3f9b84d291116646780c5b54229
+2008-11-25T16:39:34.480344Z
+35
+

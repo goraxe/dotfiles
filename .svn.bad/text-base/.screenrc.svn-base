@@ -5,13 +5,12 @@ autodetach on
 startup_message off
 
 #escape ^Tt
+
 hardstatus alwayslastline
 hardstatus string '%{gk}[ %{G}%H %{g}][%= %{wk}%?%-Lw%?%{=b kR} (%{W}%n*%f %t%?(%u)%?%{=b kR})%{= kw}%?%+Lw%?%?%= %{g}][%{Y}%l%{g}] %{=b C}[ %m/%d %c ]%{W}'
-# start up the ussal windows
 
-screen -t atop 8 atop
 screen -t top 9 top
 
 source $HOME/.screenrc.local 
 
-screen 0 /bin/bash
+screen  0 bash

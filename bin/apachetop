@@ -7,4 +7,5 @@ do
 	LOGS="${LOGS} -f $ALOG"
 done
 
-/usr/sbin/apachetop $LOGS
+echo "/usr/sbin/apachetop $@ $LOGS "  > /tmp/log
+/usr/sbin/apachetop $@ $LOGS 

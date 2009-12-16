@@ -84,22 +84,6 @@ fi
 # set PATH so it includes user's private bin if it exists
 if [[ -d ~/bin || -L ~/bin ]] ; then
     PATH="~/bin:${PATH}"
-fi
-
-export PATH
-
-EMAIL="goraxe@goraxe.me.uk"
-export EMAIL
-
-if [[ -d ~/bin.yellow || -L ~/bin.yellow ]] ; then
-    PATH="~/bin:${PATH}"
     export PATH
 fi
-
-DEBEMAIL="SophosLabs <sophoslabs@sophos.com>"
-DEBSIGN_MAINT="SophosLabs"
-DEBFULLNAME="SophosLabs"
-export DEBEMAIL DEBSIGN_MAINT DEBFULLNAME
-
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
-eval $(perl -I$HOME/foo/lib/perl5 -Mlocal::lib)

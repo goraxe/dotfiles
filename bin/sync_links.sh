@@ -3,6 +3,8 @@
 # bring in user config for overrides
 if [[ -e ${HOME}/.dotfiles ]]; then
 	source ${HOME}/.dotfiles
+elif [[ -e ${HOME}/etc/shell-conf ]]; then
+	source ${HOME}/etc/shell-conf
 fi
 
 
@@ -109,7 +111,6 @@ function is_vcs_location {
 #								MAIN
 #
 #################################################################################
-
 
 
 # do checkouts
