@@ -132,6 +132,9 @@ for repo in ${VCS_DIRS}; do
 		if [[ ${bname} == ".svn" ]]; then
 			continue
 		fi
+		if [[ ${bname} == ".git" ]]; then
+			continue
+		fi
 		echo "file >> ${files} bname >> ${bname}"
 		dest="${HOME}/${bname}"
 
