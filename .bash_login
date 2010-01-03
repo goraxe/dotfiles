@@ -20,7 +20,9 @@ if [[ ! -z $DISPLAY && ! -z $SSH_TTY ]]; then
 fi
 
 if [[ ! -z $KRB5CCNAME ]]; then
-	echo "export KRB5CCNAME=$KRB5CCNAME" >>
+	echo "export KRB5CCNAME=$KRB5CCNAME" >> ~/.env_load
+fi
+
 
 # check if we have a running AUTH SOCK
 if [[ ( ! -z $SSH_AUTH_SOCK ) && -e $SSH_AUTH_SOCK && -S $SSH_AUTH_SOCK ]]; then
