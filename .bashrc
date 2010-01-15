@@ -88,6 +88,7 @@ fi
 
 export PATH
 
+NAME="Gordon Irving"
 EMAIL="goraxe@goraxe.me.uk"
-export EMAIL
+export EMAIL NAME
 
