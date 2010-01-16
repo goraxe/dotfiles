@@ -16,16 +16,28 @@ set number
 
 " display
 " set columns=80
+
 set background=dark
 colorscheme desert
+
 highlight Folded guibg=grey50 guifg=blue
 highlight FoldColumn guibg=grey30 guifg=darkblue
+
+
 set foldcolumn=2
 set foldmethod=syntax
 syn region myFold start="{" end="}" transparent fold
+
 set ruler
 set list
 set listchars=tab:>-,trail:-,eol:@
+
+set showcmd
+set clipboard=unnamed
+
+" turn on spell-checking everywhere
+syn spell toplevel
+set spelllang=en_gb
 
 " Plugin options
 	"GetLatest
@@ -78,6 +90,9 @@ endfunction
 nmap <silent> <F2> :set invlist<CR>:set invnumber<CR>:set invfoldenable<CR>
 nmap <silent> <F3> :set invhls<CR>
 nmap <silent> <F7> :TlistToggle<CR>
+nmap <silent> <F6> :set invspell<CR>
+set pastetoggle=<F8>
+
 nmap <silent> <C-P> :pop<CR>
 
 " autocmds
