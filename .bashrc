@@ -103,3 +103,12 @@ export DEBEMAIL DEBSIGN_MAINT DEBFULLNAME
 
 export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
 eval $(perl -I$HOME/foo/lib/perl5 -Mlocal::lib)
+
+
+if [[ -e ~/.bash.p4 ]]; then
+	. ~/.bash.p4
+fi
+
+if [[ -e ~/.bash.p4.local ]]; then
+	. ~/.bash.p4.local
+fi
