@@ -14,6 +14,9 @@ endif
 
 set number
 
+" set exapndtabs
+set expandtab
+
 " display
 " set columns=80
 
