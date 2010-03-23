@@ -92,7 +92,7 @@ EMAIL="goraxe@goraxe.me.uk"
 export EMAIL
 
 if [[ -d ~/bin.yellow || -L ~/bin.yellow ]] ; then
-    PATH="~/bin:${PATH}"
+    PATH="~/bin.yellow:${PATH}"
     export PATH
 fi
 
