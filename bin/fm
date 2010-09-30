@@ -7,6 +7,33 @@ use Module::Find;
 
 
 foreach (@ARGV) {
-	my @mods = findallmod $_;
-	print map { "$_\n" } @mods;
+      # if we have a file the require it 
+      if ( -f $_ ) { 
+          eval {
+              require $_; 
+          };  
+          foreach my $mod (keys %INC) { 
+              $mod =~ s/\.pm//; 
+              $mod =~ s/\W/::/g; 
+              my $version = module_version ($mod);
+              print "$mod " . ($version ? "($version)": "") . "\n";
+          }   
+      } else {
+          # search for the modules
+          my @mods = findallmod $_; 
+          foreach my $mod ($_, @mods) {
+              my $version = module_version ($mod);
+              print "$mod " . ($version ? "($version)": "") . "\n";
+          }   
+      #   print map { "$_ \n" } @mods;
+      }   
 } 
+  
+sub module_version {
+      my $mod = shift;
+      eval "require $mod;";
+      my $version;
+      my $eval = q{$version = $}.$mod.q{::VERSION};
+      eval $eval;
+      return $version;
+}
