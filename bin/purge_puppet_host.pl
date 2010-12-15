@@ -29,7 +29,7 @@ my $dbh;
 sub db_connect {
 
     if ( not defined($dbh)) {
-        $dbh = DBI->connect("DBI:mysql:hostname=puppetdb-dev.yellow.sophos;database=puppet", "puppet", "puppet-devjazz")
+        $dbh = DBI->connect("DBI:mysql:hostname=puppetdb.yellow.sophos;database=puppet", "puppet", "puppetjazz")
             or die "Could not connect to db: " . $DBI::errstr;
     }
 
