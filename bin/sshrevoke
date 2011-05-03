@@ -1,0 +1,6 @@
+#!/bin/sh
+ssh-keygen -R $1 1>/dev/null 2>&1
+host $1 | grep "has address" | cut -d " " -f 4 | while read ip; do
+ssh-keygen -R $ip 1>/dev/null 2>&1
+done
+
