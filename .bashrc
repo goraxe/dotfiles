@@ -44,7 +44,7 @@ xterm*|rxvt*)
     ;;
 screen)
 	echo -n -e "\033k${HOSTNAME}\033\\"
-	PROMPT_COMMAND='echo -n -e "\033k${HOSTNAME}\033\\"; if [[ -e ~/.ssh_agent.sh ]]; then . ~/.ssh_agent.sh; fi'
+	PROMPT_COMMAND='echo -n -e "\033k${HOSTNAME}\033\\"; if [[ -e ~/.ssh_agent.sh ]]; then . ~/.ssh_agent.sh; fi; if [[ -e ~/.env_load ]]; then . ~/.env_load; fi'
 	;;
 *)
     ;;
@@ -91,3 +91,24 @@ export PATH
 EMAIL="goraxe@goraxe.me.uk"
 export EMAIL
 
+if [[ -d ~/bin.yellow || -L ~/bin.yellow ]] ; then
+    PATH="~/bin.yellow:${PATH}"
+    export PATH
+fi
+
+DEBEMAIL="SophosLabs <sophoslabs@sophos.com>"
+DEBSIGN_MAINT="SophosLabs"
+DEBFULLNAME="SophosLabs"
+export DEBEMAIL DEBSIGN_MAINT DEBFULLNAME
+
+export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
+eval $(perl -I$HOME/foo/lib/perl5 -Mlocal::lib)
+
+
+if [[ -e ~/.bash.p4 ]]; then
+	. ~/.bash.p4
+fi
+
+if [[ -e ~/.bash.p4.local ]]; then
+	. ~/.bash.p4.local
+fi
