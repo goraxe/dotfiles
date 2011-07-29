@@ -1,6 +1,5 @@
 #
 
-
 VCS_UPDATE_CMD="git pull"
 VCS_COMMIT_CMD="git commit -a"
 VCS_CREATE_CMD="git clone"
