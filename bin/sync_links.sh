@@ -66,7 +66,7 @@ function die {
 function is_vcs {
 	dir=$1
 	echo "is_vcs called with ${dir}"
-	return [[ -e "${dir}/.svn" ]] || [[ -e "{$dir}/.git" ]]
+	return [[ -e "${dir}/.svn" || -e "{$dir}/.git" ]]
 }
 
 function dir_update {
@@ -98,7 +98,7 @@ function vcs_create {
 function is_vcs_location {
 	dir=$1
 	vcs_location=$2
-	push ${dir}
+	pushd ${dir}
 	repo=`$VCS_LOCATION_CMD`
 	popd
 #	repo=`svn info $dir | grep "Repository Root:" | cut -d" " -f 3`
