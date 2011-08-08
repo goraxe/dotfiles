@@ -1,0 +1,13 @@
+#
+
+VCS_UPDATE_CMD="git pull"
+VCS_COMMIT_CMD="git commit -a"
+VCS_CREATE_CMD="git clone"
+
+
+VCS_LOCATION="git@github.com:goraxe/dotfiles.git"
+VCS_LOCATION_HOME="git@github.com:goraxe/dotfiles.git"
+
+CHECKOUT_HOME="${HOME}/dotfiles"
+
+VCS_DIRS="HOME"
