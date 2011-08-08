@@ -1,10 +1,18 @@
 #!/bin/bash
 
+BINDIR=$(dirname $0)
+
+echo ${BINDIR}/../etc/shell-conf
+
 # bring in user config for overrides
 if [[ -e ${HOME}/.dotfiles ]]; then
 	source ${HOME}/.dotfiles
 elif [[ -e ${HOME}/etc/shell-conf ]]; then
 	source ${HOME}/etc/shell-conf
+elif [[ -e ${BINDIR}/../etc/shell-conf ]]; then
+	source ${BINDIR}/../etc/shell-conf
+else 
+	echo "do not know what to sync please setup a .dotfiles rc file"
 fi
 
 
