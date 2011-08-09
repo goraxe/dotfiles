@@ -2,7 +2,22 @@
 
 
 INSTALL_HOST=$1
-SSH_OPTS=${*:2}
+
+function usage {
+echo <<EOT
+    $0: user@target host
+will setup the user to have the dotfiles folder deployed to them and cause an initial sync
+EOT
+}
+
+if [[ "${INSTALL_HOST}x" == "x" ]]; then
+    usage
+    exit
+fi
+
+
+SSH_OPTS="-o StrictHostKeyChecking=no "
+SSH_OPTS="${SSH_OPTS} ${*:2}"
 echo "INSTALL_HOST ${INSTALL_HOST}"
 echo "SSH_OPTS ${SSH_OPTS}"
 echo "mkdir bin"
@@ -20,7 +35,7 @@ VCS_CREATE_CMD="git clone"
 VCS_LOCATION="${USER}@${HOSTNAME}:dotfiles"
 VCS_LOCATION_HOME="${USER}@${HOSTNAME}:dotfiles"
 
-CHECKOUT_HOME="${HOME}/dotfiles"
+CHECKOUT_HOME="\${HOME}/dotfiles"
 
 VCS_DIRS="HOME"
 EOT
@@ -42,5 +57,8 @@ echo "running sync"
 ssh ${SSH_OPTS} $INSTALL_HOST "bin/sync_links.sh | tee ~/log/install-$INSTALL_HOST.log"
 pushd ~/dotfiles
 git remote add -m ${INSTALL_HOST} -f ${INSTALL_HOST} ${INSTALL_HOST}:dotfiles
+
+ssh $INSTALL_HOST ${SSH_OPTS} mv .ssh/config.orig .ssh/config
+
 
 popd
