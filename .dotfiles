@@ -1,5 +1,6 @@
 # vim: ft=sh
 CHECKOUT_HOME="${HOME}/dotfiles"
+#
 
 VCS_UPDATE_CMD="git pull"
 VCS_CREATE_CMD="git clone"
@@ -10,4 +11,6 @@ VCS_LOCATION_CMD_CUT="cut -d' ' -f 4"
 
 
 VCS_LOCATION_HOME="git@github.com:goraxe/dotfiles.git"
+CHECKOUT_HOME="${HOME}/dotfiles"
+
 VCS_DIRS="HOME"

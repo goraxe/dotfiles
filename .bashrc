@@ -44,7 +44,7 @@ xterm*|rxvt*)
     ;;
 screen)
 	echo -n -e "\033k${HOSTNAME}\033\\"
-	PROMPT_COMMAND='echo -n -e "\033k${HOSTNAME}\033\\"; if [[ -e ~/.ssh_agent.sh ]]; then . ~/.ssh_agent.sh; fi'
+	PROMPT_COMMAND='echo -n -e "\033k${HOSTNAME}\033\\"; if [[ -e ~/.ssh_agent.sh ]]; then . ~/.ssh_agent.sh; fi; if [[ -e ~/.env_load ]]; then . ~/.env_load; fi'
 	;;
 *)
     ;;

@@ -3,6 +3,8 @@
 # bring in user config for overrides
 if [[ -e ${HOME}/.dotfiles ]]; then
 	source ${HOME}/.dotfiles
+elif [[ -e ${HOME}/etc/shell-conf ]]; then
+	source ${HOME}/etc/shell-conf
 fi
 
 
@@ -64,8 +66,8 @@ function die {
 function is_vcs {
 	dir=$1
 	echo "is_vcs called with ${dir}"
-	[[ -e "${dir}/.svn" || -e "${dir}/.git" ]]
-	return 
+
+	return [[ -e "${dir}/.svn" || -e "{$dir}/.git" ]]
 }
 
 function dir_update {
@@ -114,7 +116,6 @@ function is_vcs_location {
 #								MAIN
 #
 #################################################################################
-
 
 
 # do checkouts

@@ -12,6 +12,18 @@ fi
 
 trap "echo No ^C here" INT TERM EXIT
 
+
+echo -en > ~/.env_load
+# save environment vars for future rescue
+if [[ ! -z $DISPLAY && ! -z $SSH_TTY ]]; then
+	echo "export DISPLAY=$DISPLAY" >> ~/.env_load
+fi
+
+if [[ ! -z $KRB5CCNAME ]]; then
+	echo "export KRB5CCNAME=$KRB5CCNAME" >> ~/.env_load
+fi
+
+
 # check if we have a running AUTH SOCK
 if [[ ( ! -z $SSH_AUTH_SOCK ) && -e $SSH_AUTH_SOCK && -S $SSH_AUTH_SOCK ]]; then
 	# tunneld AUTH and we have an identitiy file so add it  

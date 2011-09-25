@@ -15,6 +15,9 @@ endif
 
 set number
 
+" set exapndtabs
+set expandtab
+
 " display
 " set columns=80
 
@@ -46,7 +49,7 @@ set spelllang=en_gb
 	
 	" TagList
 	let Tlist_Close_On_Select			= 1
-let Tlist_Auto_Open = 0
+    let Tlist_Auto_Open = 0
 	let Tlist_Display_Prototype			= 1
 	let Tlist_File_Fold_Auto_Close		= 1
 	let Tlist_GainFocus_On_ToggleOpen	= 1
@@ -63,6 +66,7 @@ let Tlist_Auto_Open = 0
 	let perl_fold  =1
 	let perl_nofold_packages =0
 	let perl_fold_blocks = 1
+	let perl_nofold_packages = 1
 "	let g:Perl_NoKeyMappings = 1
 
 	" options for minibufexpl
@@ -76,6 +80,7 @@ let Tlist_Auto_Open = 0
 	if has("win32")
 	else 
 	"linux
+		let g:dbext_default_profile_filesdb = ''
 	endif
 
 " functions
