@@ -3,6 +3,7 @@ set nocompatible
 set bs=2
 set ts=4
 set sw=4
+set expandtab
 set wrapmargin=0
 syntax on
 set autowrite
@@ -55,12 +56,12 @@ let Tlist_Auto_Open = 0
 
 	" perlsupport options
 	let g:Perl_AuthorName = "Gordon Irving"
-	let g:Perl_Company = "Sophos"
 	let g:Perl_Author = "Gordon Irving"
-	let g:Perl_Email  = "Gordon.irving@sophos.com"
+	let g:Perl_Email  = "goraxe@cpan.org"
 
 	" options for perl.vim
 	let perl_fold  =1
+	let perl_nofold_packages =0
 	let perl_fold_blocks = 1
 "	let g:Perl_NoKeyMappings = 1
 
