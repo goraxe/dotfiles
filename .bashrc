@@ -86,9 +86,18 @@ if [[ -d ~/bin || -L ~/bin ]] ; then
     PATH="~/bin:${PATH}"
 fi
 
+if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
+    PATH="${HOME}/go/bin:${PATH}"
+fi
+
 export PATH
 
+DEBFULLNAME="Gordon Irving"
 NAME="Gordon Irving"
 EMAIL="goraxe@goraxe.me.uk"
 export EMAIL NAME
 
+EC2_PRIVATE_KEY=~/personal/ec2/private.key
+EC2_CERT=~/personal/ec2/cert.pem
+export EC2_CERT EC2_PRIVATE_KEY
+eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
