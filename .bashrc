@@ -86,6 +86,10 @@ if [[ -d ~/bin || -L ~/bin ]] ; then
     PATH="~/bin:${PATH}"
 fi
 
+if [[ -d ~/bin.local || -L ~/bin.local ]] ; then
+    PATH="~/bin.local:${PATH}"
+fi
+
 if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
     PATH="${HOME}/go/bin:${PATH}"
 fi
