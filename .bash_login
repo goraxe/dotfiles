@@ -1,4 +1,21 @@
+# vim: ft=sh
 SSH_AGENT_PID=""
+
+function do_ssh_add {
+
+redo=1
+#
+while [ $redo != 0 ]
+do
+		ssh-add
+		if [[ $? == 0 ]]; then
+			redo=0
+		else
+			echo "FAIL: Try again"
+		fi
+done
+}
+
 
 # If not running interactivly, lets bugger off
 [ -z "$PS1" ] && return
@@ -30,17 +47,19 @@ if [[ ( ! -z $SSH_AUTH_SOCK ) && -e $SSH_AUTH_SOCK && -S $SSH_AUTH_SOCK ]]; then
 	echo "tunneled auth"
 	echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh_agent.sh
 	if [[ -z $SSH_AGENT_PID && -e ~/.ssh/id_rsa ]]; then
-		ssh-add
+		do_ssh_add
 	fi
 # check if a previous session has started an agent
 elif [[ -e ~/.ssh_agent.sh ]]; then
 	echo "connecting to current agent"
 	. ~/.ssh_agent.sh
-# no tunneled auth and 
+#	# ssh-agent allready running nuke the key and make us re-enter the password
+    do_ssh_add
 else
 	echo "starting new agent"
 	ssh-agent -s > ~/.ssh_agent.sh
 	. ~/.ssh_agent.sh
+    do_ssh_add
 fi
 
 # we have login in over ssh 
@@ -73,33 +92,5 @@ fi
 
 # for the moment lets not do fancy ssh-agent stuffs
 return
-
-#redo=1
-#
-#while [ $redo != 0 ]
-#do
-#	if [[ -z $SSH_AGENT_PID || ! -d /proc/$SSH_AGENT_PID ]]; then
-#		ssh-agent -s > ~/.ssh_agent.sh
-#		. ~/.ssh_agent.sh
-#		ssh-add
-#		if [[ $? == 0 ]]; then
-#			redo=0
-#		else
-#			echo "FAIL: Try again"
-#		fi
-#	else 
-#	# ssh-agent allready running nuke the key and make us re-enter the password
-#		ssh-add -d 2>/dev/null
-#		ssh-add
-#		if [[ $? == 0 ]]; then
-#			redo=0
-#		else
-#			echo "FAIL: Try again"
-#		fi
-#	fi
-#done
-#if [[ $redo == 0 ]]; then
-#	screen -d -RR
-#fi
 
 # vim: ft=sh
