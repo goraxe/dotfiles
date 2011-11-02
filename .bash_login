@@ -5,7 +5,7 @@ function do_ssh_add {
 
 redo=1
 #
-while [ $redo != 0 ]
+while [[ $redo != 0 ]]
 do
 		ssh-add
 		if [[ $? == 0 ]]; then
@@ -51,8 +51,14 @@ if [[ ( ! -z $SSH_AUTH_SOCK ) && -e $SSH_AUTH_SOCK && -S $SSH_AUTH_SOCK ]]; then
 	fi
 # check if a previous session has started an agent
 elif [[ -e ~/.ssh_agent.sh ]]; then
-	echo "connecting to current agent"
-	. ~/.ssh_agent.sh
+    . ~/.ssh_agent.sh
+    if [[ -d /proc/$SSH_AGENT_PID ]]; then
+        echo "starting new agent"
+        ssh-agent -s > ~/.ssh_agent.sh
+        . ~/.ssh_agent.sh
+    else
+        echo "connecting to current agent"
+    fi
 #	# ssh-agent allready running nuke the key and make us re-enter the password
     do_ssh_add
 else
