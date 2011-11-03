@@ -1,3 +1,4 @@
-.vim/.netrwhist
 .vim/doc/vimspell.txt
+*vimspell*
+.vim/.netrwhist
 *.sw*
