@@ -22,10 +22,6 @@ done
 # if we already set things up lets do it again
 [ ! -z "$LOGGED_IN" ] && return
 
-if [[ -e ~/bin/sync_links.sh ]]; then
-	echo "sync"
-	~/bin/sync_links.sh
-fi
 
 trap "echo No ^C here" INT TERM EXIT
 
@@ -66,6 +62,12 @@ else
 	ssh-agent -s > ~/.ssh_agent.sh
 	. ~/.ssh_agent.sh
     do_ssh_add
+fi
+
+# make sure we have an agent before syncing
+if [[ -e ~/bin/sync_links.sh ]]; then
+	echo "sync"
+	~/bin/sync_links.sh
 fi
 
 # we have login in over ssh 
