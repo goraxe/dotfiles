@@ -5,8 +5,15 @@
 if [ "$SHLVL" = 1 ]; then
     # kill current ssh-agent
     . ~/.ssh_agent.sh
-    ssh-add -d
-    rm ~/.ssh_agent.sh
+
+    # remove our key
+    ssh-add -d .ssh/id_rsa.pub
+
+    # if we started an agent kill it
+    if [[ $SSH_AGENT_PID ]]; then
+        ssh-agent -k
+    fi
+
     [ -x /usr/bin/clear_console ] && /usr/bin/clear_console -q
 fi
 
