@@ -74,6 +74,7 @@ function die {
 function is_vcs {
 	dir=$1
 	echo "is_vcs called with ${dir}"
+
 	return [[ -e "${dir}/.svn" || -e "{$dir}/.git" ]]
 }
 
@@ -87,7 +88,9 @@ function dir_update {
 		is_vcs_location ${dir} ${vcs_location}
 		IS_VCS_LOCATION=$?
 		if [[ ${IS_VCS} &&  ${IS_VCS_LOCATION} ]]; then
-			${VCS_UPDATE_CMD} ${dir}
+			pushd ${dir}				
+			${VCS_UPDATE_CMD}
+			popd
 			return
 		else 
 			echo "existing ${dir} being backed up to ${dir}.bck" 
@@ -107,8 +110,10 @@ function is_vcs_location {
 	dir=$1
 	vcs_location=$2
 	pushd ${dir}
-	repo=`$VCS_LOCATION_CMD`
+	echo "VCS_LOCATION_CMD $VCS_LOCATION_CMD"
+	repo=`${VCS_LOCATION_CMD}|${VCS_LOCATION_CMD_GREP}|cut -d" " -f 4`
 	popd
+	echo "REPO = ${repo} vcs_location = ${vcs_location}"
 #	repo=`svn info $dir | grep "Repository Root:" | cut -d" " -f 3`
 	[[ ${vcs_location} == ${repo} ]]
 	return 

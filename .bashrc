@@ -86,29 +86,22 @@ if [[ -d ~/bin || -L ~/bin ]] ; then
     PATH="~/bin:${PATH}"
 fi
 
+if [[ -d ~/bin.local || -L ~/bin.local ]] ; then
+    PATH="~/bin.local:${PATH}"
+fi
+
+if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
+    PATH="${HOME}/go/bin:${PATH}"
+fi
+
 export PATH
 
+DEBFULLNAME="Gordon Irving"
+NAME="Gordon Irving"
 EMAIL="goraxe@goraxe.me.uk"
-export EMAIL
+export EMAIL NAME
 
-if [[ -d ~/bin.yellow || -L ~/bin.yellow ]] ; then
-    PATH="~/bin.yellow:${PATH}"
-    export PATH
-fi
-
-DEBEMAIL="SophosLabs <sophoslabs@sophos.com>"
-DEBSIGN_MAINT="SophosLabs"
-DEBFULLNAME="SophosLabs"
-export DEBEMAIL DEBSIGN_MAINT DEBFULLNAME
-
-export JAVA_HOME=/usr/lib/jvm/java-6-openjdk
-eval $(perl -I$HOME/foo/lib/perl5 -Mlocal::lib)
-
-
-if [[ -e ~/.bash.p4 ]]; then
-	. ~/.bash.p4
-fi
-
-if [[ -e ~/.bash.p4.local ]]; then
-	. ~/.bash.p4.local
-fi
+EC2_PRIVATE_KEY=~/personal/ec2/private.key
+EC2_CERT=~/personal/ec2/cert.pem
+export EC2_CERT EC2_PRIVATE_KEY
+eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
