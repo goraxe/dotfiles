@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
 
+PATH="/bin:/usr/bin:/usr/local/bin:/sbin:/usr/sbin:/usr/games"
+
 export TMP=$HOME/tmp
 
 # If not running interactively, don't do anything
@@ -82,6 +84,11 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
+fi
+
+
 # moved from .profile due to it not getting sourced everywhere i want it sourced
 # set PATH so it includes user's private bin if it exists
 if [[ -d ~/bin || -L ~/bin ]] ; then
@@ -98,12 +105,4 @@ fi
 
 export PATH
 
-DEBFULLNAME="Gordon Irving"
-NAME="Gordon Irving"
-EMAIL="goraxe@goraxe.me.uk"
-export EMAIL NAME
-
-EC2_PRIVATE_KEY=~/personal/ec2/private.key
-EC2_CERT=~/personal/ec2/cert.pem
-export EC2_CERT EC2_PRIVATE_KEY
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
