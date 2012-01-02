@@ -92,11 +92,11 @@ fi
 # moved from .profile due to it not getting sourced everywhere i want it sourced
 # set PATH so it includes user's private bin if it exists
 if [[ -d ~/bin || -L ~/bin ]] ; then
-    PATH="~/bin:${PATH}"
+    PATH="${HOME}/bin:${PATH}"
 fi
 
 if [[ -d ~/bin.local || -L ~/bin.local ]] ; then
-    PATH="~/bin.local:${PATH}"
+    PATH="${HOME}/bin.local:${PATH}"
 fi
 
 if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
