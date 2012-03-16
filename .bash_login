@@ -37,12 +37,22 @@ if [[ ! -z $KRB5CCNAME ]]; then
 fi
 
 
+
 function have_agent_connection {
-    [[ ( ! -z $SSH_AUTH_SOCK ) && -e $SSH_AUTH_SOCK && -S $SSH_AUTH_SOCK ]]
+    local __resultvar=$1
+    local res=
+    if [[ ( ! -z $SSH_AUTH_SOCK ) && -e $SSH_AUTH_SOCK && -S $SSH_AUTH_SOCK ]]; then
+        res="1"
+    fi
+    if [[ "$__resultvar" ]]; then
+        eval $__resultvar="'$res'"
+    else
+        echo "$res"
+    fi
 }
 
 # check if we have a running AUTH SOCK
-if ( have_agent_connection ); then
+if ( $(have_agent_connection) ); then
 	# tunneld AUTH and we have an identitiy file so add it  
 	echo "tunneled auth"
 	echo "export SSH_AUTH_SOCK=$SSH_AUTH_SOCK" > ~/.ssh_agent.sh
@@ -52,7 +62,7 @@ if ( have_agent_connection ); then
 # check if a previous session has started an agent
 elif [[ -e ~/.ssh_agent.sh ]]; then
     . ~/.ssh_agent.sh
-    if ( have_agent_connection ); then
+    if ( $(have_agent_connection) ); then
         echo "connecting to current agent"
     else
         echo "starting new agent"
