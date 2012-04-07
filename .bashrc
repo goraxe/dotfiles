@@ -103,6 +103,10 @@ if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
     PATH="${HOME}/go/bin:${PATH}"
 fi
 
+if [[ -d $HOME/node/bin || -L $HOME/node/bin ]] ; then
+    PATH="${HOME}/node/bin:${PATH}"
+fi
+
 export PATH
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
