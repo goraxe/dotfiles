@@ -92,7 +92,7 @@ function! PlainTextFile ()
 endfunction
 
 " maps
-
+nmap gf :vs <cfile><CR>
 nmap <silent> <F2> :set invlist<CR>:set invnumber<CR>:set invfoldenable<CR>
 nmap <silent> <F3> :set invhls<CR>
 nmap <silent> <F7> :TlistToggle<CR>
