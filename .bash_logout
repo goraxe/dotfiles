@@ -7,7 +7,9 @@ if [ "$SHLVL" = 1 ]; then
     . ~/.ssh_agent.sh
 
     # remove our key
-    ssh-add -d .ssh/id_rsa.pub
+    if [[ -e .ssh/id_rsa.pub ]]; then
+        ssh-add -d .ssh/id_rsa.pub
+    fi
 
     # if we started an agent kill it
     if [[ $SSH_AGENT_PID ]]; then
