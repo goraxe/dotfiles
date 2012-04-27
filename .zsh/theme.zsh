@@ -17,7 +17,7 @@ function theme_precmd {
     else
       PR_FILLBAR="\${(l.(($TERMWIDTH - ($promptsize + $rubypromptsize + $pwdsize)))..${PR_HBAR}.)}"
     fi
-
+    MODE="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
 }
 
 
@@ -36,9 +36,12 @@ fi
 
 function vi_mode_prompt_info() {
 
-    echo "${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+    export MODE="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
+    echo $MODE
 }
 
+vi_mode_prompt_info
+zle -N zle-keymap-select vi_mode_prompt_info
 
 setprompt () {
     ###
@@ -134,7 +137,7 @@ $PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\
     # display exitcode on the right when >0
     return_code="%(?..%{$fg[red]%}%? ↵ %{$reset_color%})"
     RPROMPT=' $return_code$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_BLUE$PR_HBAR$PR_SHIFT_OUT\
-$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_BLUE$PR_HBAR$PR_SHIFT_OUT($PR_YELLOW`vi_mode_prompt_info`$PR_BLUE)\
+$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_BLUE$PR_HBAR$PR_SHIFT_OUT($PR_YELLOW${(e)MODE}$PR_BLUE)\
 $PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_BLUE$PR_HBAR$PR_SHIFT_OUT($PR_YELLOW%D{%a,%b%d}$PR_BLUE)$PR_SHIFT_IN$PR_HBAR$PR_CYAN$PR_LRCORNER$PR_SHIFT_OUT$PR_NO_COLOUR'
 
     PS2='$PR_CYAN$PR_SHIFT_IN$PR_HBAR$PR_SHIFT_OUT\

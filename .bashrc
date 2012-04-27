@@ -59,23 +59,10 @@ esac
 # ~/.bash_aliases, instead of adding them here directly.
 # See /usr/share/doc/bash-doc/examples in the bash-doc package.
 
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+if [ -f ~/.aliases ]; then
+    . ~/.aliases
 fi
 
-
-# enable color support of ls and also add handy aliases
-if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
-    #alias dir='ls --color=auto --format=vertical'
-    #alias vdir='ls --color=auto --format=long'
-fi
-
-# some more ls aliases
-#alias ll='ls -l'
-#alias la='ls -A'
-#alias l='ls -CF'
 
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
@@ -88,25 +75,8 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
-
-# moved from .profile due to it not getting sourced everywhere i want it sourced
-# set PATH so it includes user's private bin if it exists
-if [[ -d ~/bin || -L ~/bin ]] ; then
-    PATH="${HOME}/bin:${PATH}"
+if [[ -e  $HOME/.profile]]; then
+    source $HOME/.profile
 fi
-
-if [[ -d ~/bin.local || -L ~/bin.local ]] ; then
-    PATH="${HOME}/bin.local:${PATH}"
-fi
-
-if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
-    PATH="${HOME}/go/bin:${PATH}"
-fi
-
-if [[ -d $HOME/node/bin || -L $HOME/node/bin ]] ; then
-    PATH="${HOME}/node/bin:${PATH}"
-fi
-
-export PATH
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
