@@ -34,3 +34,7 @@ done
 if [[ -e  $HOME/.aliases ]]; then
     source $HOME/.aliases
 fi
+
+if [[ -e  $HOME/.profile ]]; then
+    source $HOME/.profile
+fi
