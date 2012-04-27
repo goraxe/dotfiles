@@ -132,6 +132,7 @@ function is_vcs_location {
 for repo in ${VCS_DIRS}; do
 	LOC=$(eval "echo \$$(echo VCS_LOCATION_${repo})")
 	DIR=$(eval "echo \$$(echo CHECKOUT_${repo})")
+    DEST=$(eval "echo \$$(echo DEST_${repo})") || $HOME
 
 	echo "syncing repository ${repo} from ${LOC}  to ${DIR}"
 	dir_update ${DIR} ${LOC}
@@ -151,7 +152,7 @@ for repo in ${VCS_DIRS}; do
 			continue
 		fi
 		echo "file >> ${files} bname >> ${bname}"
-		dest="${HOME}/${bname}"
+		bdest="${DEST}/${bname}"
 
 		# if we have dry run dont copy 
 		if [[ ! -z ${DRY_RUN} ]]; then
@@ -159,11 +160,11 @@ for repo in ${VCS_DIRS}; do
 		fi
 
 		# its a link allready make sure it points where we want
-		if [[ -L ${dest} ]]; then
-			rm ${dest} || die "could not remove link ${dest}"
-		elif [[ -e ${dest} ]]; then # dest exists move it to bck
-			mv ${dest} ${dest}.bck
+		if [[ -L ${bdest} ]]; then
+			rm ${bdest} || die "could not remove link ${bdest}"
+		elif [[ -e ${bdest} ]]; then # dest exists move it to bck
+			mv ${bdest} ${bdest}.bck
 		fi
-		ln -s ${files} ${dest}
+		ln -s ${files} ${bdest}
 	done 
 done

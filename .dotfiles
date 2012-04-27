@@ -13,4 +13,8 @@ VCS_LOCATION_CMD_CUT="cut -d' ' -f 4"
 VCS_LOCATION_HOME="git@github.com:goraxe/dotfiles.git"
 CHECKOUT_HOME="${HOME}/dotfiles"
 
-VCS_DIRS="HOME"
+CHECKOUT_CONFIG="${HOME}/configfiles"
+DEST_CONFIG="${HOME}/.config"
+
+
+VCS_DIRS="HOME CONFIG"
