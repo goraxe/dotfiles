@@ -75,7 +75,7 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
-if [[ -e  $HOME/.profile]]; then
+if [[ -e  $HOME/.profile ]]; then
     source $HOME/.profile
 fi
 
