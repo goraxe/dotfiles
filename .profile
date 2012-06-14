@@ -1,9 +1,9 @@
 # set PATH so it includes user's private bin if it exists
-if [[ -d ~/bin || -L ~/bin ]] ; then
+if [[ -d ${HOME}/bin || -L ${HOME}/bin ]] ; then
     PATH="${HOME}/bin:${PATH}"
 fi
 
-if [[ -d ~/bin.local || -L ~/bin.local ]] ; then
+if [[ -d ${HOME}/bin.local || -L ${HOME}/bin.local ]] ; then
     PATH="${HOME}/bin.local:${PATH}"
 fi
 
