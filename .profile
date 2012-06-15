@@ -15,5 +15,18 @@ if [[ -d $HOME/node/bin || -L $HOME/node/bin ]] ; then
     PATH="${HOME}/node/bin:${PATH}"
 fi
 
-export PATH
+ANDROID_HOME="$HOME/android-sdks"
+
+if [[ -e "${ANDROID_HOME}/tools" ]]; then
+    PATH="$PATH:${ANDROID_HOME}/tools"
+fi
+
+if [[ -e "${ANDROID_HOME}/platform-tools" ]]; then
+    PATH="$PATH:${ANDROID_HOME}/platform-tools"
+fi
+
+if [[ -e "$HOME/apache-maven/bin" ]]; then
+    PATH="$HOME/apache-maven/bin:$PATH"
+fi
+export ANDROID_HOME PATH
 
