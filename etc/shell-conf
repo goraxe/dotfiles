@@ -1,5 +1,7 @@
 #
 
+echo "config file sourced"
+
 VCS_UPDATE_CMD="git pull"
 VCS_COMMIT_CMD="git commit -a"
 VCS_CREATE_CMD="git clone"
@@ -7,7 +9,12 @@ VCS_CREATE_CMD="git clone"
 
 VCS_LOCATION="git@github.com:goraxe/dotfiles.git"
 VCS_LOCATION_HOME="git@github.com:goraxe/dotfiles.git"
+VCS_LOCATION_CONFIG="git@github.com:goraxe/configfiles.git"
 
 CHECKOUT_HOME="${HOME}/dotfiles"
+DEST_HOME="${HOME}"
 
-VCS_DIRS="HOME"
+CHECKOUT_CONFIG="${HOME}/configfiles"
+DEST_CONFIG="${HOME}/.config"
+
+VCS_DIRS="CONFIG HOME"
