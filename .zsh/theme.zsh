@@ -37,7 +37,7 @@ fi
 function vi_mode_prompt_info() {
 
     export MODE="${${KEYMAP/vicmd/$MODE_INDICATOR}/(main|viins)/}"
-    echo $MODE
+#    echo $MODE
 }
 
 vi_mode_prompt_info
