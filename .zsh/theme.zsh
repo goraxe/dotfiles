@@ -98,10 +98,12 @@ setprompt () {
 
     case $TERM in
 	xterm*)
-	    PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\a%}'
+	    PR_TITLEBAR=$'%{\e]0;%(!.-=*[ROOT]*=- | .)%n@%m | ${COLUMNS}x${LINES} | %y\a%}'
 	    ;;
 	screen*)
-	    PR_TITLEBAR=$'%{\e_screen \005 (\005t) | %(!.-=[ROOT]=- | .)%n@%m:%~ | ${COLUMNS}x${LINES} | %y\e\\%}'
+	    PR_TITLEBAR=$'%{\e_%(!.-=[ROOT]=- | .)%n@%m:%~\e\\%}'
+
+#	    PR_TITLEBAR=$'%{\e%(!.-=[ROOT]=- | .)%n@%m:%~ }'
 	    ;;
 	*)
 	    PR_TITLEBAR=''
@@ -111,8 +113,8 @@ setprompt () {
 
     ###
     # Decide whether to set a screen title
-    if [[ "$TERM" == "screen" ]]; then
-	PR_STITLE=$'%{\ekzsh\e\\%}'
+    if [[ "$TERM" == "screen" || "$TERM" == "screen-256color" ]]; then
+	PR_STITLE=$'%{\ek%(!.-=[ROOT]=- | .)%n@%m\e\\%}'
     else
 	PR_STITLE=''
     fi
