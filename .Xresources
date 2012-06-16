@@ -57,7 +57,7 @@ XTerm*cursorColor: magenta
 
 ! URxvt.geometry: 80x25
 !URxvt*font: xft:DejaVu Sans Mono:pixelsize=9
-URxvt*font: xft:Terminus:pixelsize=12
+URxvt*font: xft:Terminus:pixelsize=16
 URxvt*inheritPixmap: true
 URxvt*tintColor: gray30
 URxvt.internalBorder: 0
