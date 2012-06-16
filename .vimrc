@@ -111,11 +111,11 @@ if !exists("autocommands_loaded")
 	au BufNewFile,BufRead *.t setfiletype=perl
 
 	autocmd BufEnter * let &titlestring = "[" . system("whoami") ."](". expand("%:t") . ")"
-	if &term == "screen"
+	if &term == "screen" || &term == "screen-256color"
 		set t_ts=k
 		set t_fs=\
 	endif
-	if &term == "screen" || &term == "xterm"
+	if &term == "screen" || &term == "screen-256color" || &term == "xterm"
 		set title
 	endif
 endif
