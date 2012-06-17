@@ -2,7 +2,6 @@
 
 BINDIR=$(dirname $0)
 
-echo ${BINDIR}/../etc/shell-conf
 
 # bring in user config for overrides
 if [[ -e ${HOME}/.dotfiles ]]; then
