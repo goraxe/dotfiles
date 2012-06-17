@@ -1,0 +1,7 @@
+#!/bin/sh
+
+if which /bin/zsh; then
+    exec /bin/zsh $@
+else
+    exec /bin/bash $@
+fi
