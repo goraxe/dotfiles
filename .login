@@ -68,6 +68,9 @@ if [[ -e ~/bin/sync_links.sh ]]; then
     ~/bin/sync_links.sh
 fi
 
+# overwrite the trap handlers to defaults at this point
+trap - INT TERM EXIT
+
 if which tmux ; then
     if [[ "x$POWERDETACH" == "xyes" ]]; then
         echo "pow detach tmux"
