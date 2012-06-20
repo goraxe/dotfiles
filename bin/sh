@@ -1,7 +1,12 @@
 #!/bin/sh
+echo args $@ >> ~/log/sh.log
+export >> ~/log/sh.log
+
 
 if which /bin/zsh; then
+    export SHELL=/bin/zsh
     exec /bin/zsh $@
 else
+    export SHELL=/bin/bash
     exec /bin/bash $@
 fi
