@@ -1,18 +1,28 @@
 # set PATH so it includes user's private bin if it exists
+
+# reset path each time this gets sourced
+if [[ -r /etc/environment ]]; then
+    source /etc/environment
+fi
+
+if [[ -r ${HOME}/.profile.local ]]; then 
+    source ${HOME}/.profile.local
+fi
+
 if [[ -d ${HOME}/bin || -L ${HOME}/bin ]] ; then
-    PATH="${HOME}/bin:${PATH}"
+    PATH="${PATH}:${HOME}/bin"
 fi
 
 if [[ -d ${HOME}/bin.local || -L ${HOME}/bin.local ]] ; then
-    PATH="${HOME}/bin.local:${PATH}"
+    PATH="${PATH}:${HOME}/bin.local"
 fi
 
 if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
-    PATH="${HOME}/go/bin:${PATH}"
+    PATH="${PATH}:${HOME}/go/bin"
 fi
 
 if [[ -d $HOME/node/bin || -L $HOME/node/bin ]] ; then
-    PATH="${HOME}/node/bin:${PATH}"
+    PATH="${PATH}:${HOME}/node/bin"
 fi
 
 ANDROID_HOME="$HOME/android-sdks"
