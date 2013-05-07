@@ -6,3 +6,4 @@
 *.sw*
 *~
 .vim/GetLatest/GetLatestVimScripts.dist
+.vim/contrib
