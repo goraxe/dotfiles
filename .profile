@@ -5,6 +5,10 @@ if [[ -r /etc/environment ]]; then
     source /etc/environment
 fi
 
+if [[ -r ${HOME}/.bash.p4 ]]; then
+    source ${HOME}/.bash.p4
+fi
+
 if [[ -r ${HOME}/.profile.local ]]; then 
     source ${HOME}/.profile.local
 fi
@@ -21,8 +25,16 @@ if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
     PATH="${PATH}:${HOME}/go/bin"
 fi
 
+if [[ -d $HOME/perl5/bin || -L $HOME/perl5/bin ]] ; then
+    PATH="${PATH}:${HOME}/perl5/bin"
+fi
+
 if [[ -d $HOME/node/bin || -L $HOME/node/bin ]] ; then
     PATH="${PATH}:${HOME}/node/bin"
+fi
+
+if [[ -d $HOME/neo4j/bin || -L $HOME/neo4j/bin ]] ; then
+    PATH="${PATH}:${HOME}/neo4j/bin"
 fi
 
 ANDROID_HOME="$HOME/android-sdks"
@@ -38,5 +50,7 @@ fi
 if [[ -e "$HOME/apache-maven/bin" ]]; then
     PATH="$HOME/apache-maven/bin:$PATH"
 fi
+
 export ANDROID_HOME PATH
 
+eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
