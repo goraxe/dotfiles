@@ -75,6 +75,10 @@ set spelllang=en_gb
 	let g:miniBufExplMapCTabSwitchBufs = 1
 	let g:miniBufExplModSelTarget = 1
 
+    " options for VimOrganizer
+    au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
+    au BufEnter *.org            call org#SetOrgFileType()
+
 	" dbext profiles
 	" win32
 	if has("win32")
@@ -109,6 +113,7 @@ if !exists("autocommands_loaded")
 	au BufNewFile,BufRead *.txt call PlainTextFile()
 " for perl test files
 	au BufNewFile,BufRead *.t setfiletype=perl
+
 
 	autocmd BufEnter * let &titlestring = "[" . system("whoami") ."](". expand("%:t") . ")"
 	if &term == "screen" || &term == "screen-256color"
