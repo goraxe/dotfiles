@@ -5,3 +5,4 @@
 .vim/.netrwhist
 *.sw*
 *~
+.vim/GetLatest/GetLatestVimScripts.dist
