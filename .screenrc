@@ -3,7 +3,7 @@ vbell on
 autodetach on
 
 startup_message off
-backtick 1 1 1 repo_status.sh
+backtick 1 5 5 repo_status.sh
 
 #escape ^Tt
 hardstatus alwayslastline

@@ -21,7 +21,9 @@ shopt -s checkwinsize
 export EDITOR=vim
 export HOSTNAME=`hostname -s`
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+if [ ! -e /etc/gentoo-release ]; then 
+    [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
+fi
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
