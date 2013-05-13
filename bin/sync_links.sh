@@ -87,9 +87,10 @@ function dir_update {
 		is_vcs_location ${dir} ${vcs_location}
 		IS_VCS_LOCATION=$?
 		if [[ ${IS_VCS} &&  ${IS_VCS_LOCATION} ]]; then
-            echo "going to run ${VCS_UPDATE_CMD} ${dir}"
+            echo "going to run update_cmd: ${VCS_UPDATE_CMD} ${dir}"
             pushd ${dir}
-			${VCS_UPDATE_CMD} ${dir}
+			${VCS_UPDATE_CMD} 
+            #${dir}
             popd
 			return
 		else 
@@ -103,6 +104,7 @@ function dir_update {
 function vcs_create {
 	dir=$1
 	vcs_location=$2
+    echo "going to run create_cmd: ${VCS_CREATE_CMD} {$vcs_location} ${dir}"
 	${VCS_CREATE_CMD} ${vcs_location} ${dir}  || die "could not checkout ${vcs_location} to ${dir}"
 }
 
@@ -113,7 +115,7 @@ function is_vcs_location {
     echo "vcs_location_cmd: $VCS_LOCATION_CMD"
 	repo=$($VCS_LOCATION_CMD)
 	popd
-	echo "REPO = ${repo} vcs_location = ${vcs_location}"
+	# echo "REPO = ${repo} vcs_location = ${vcs_location}"
 #	repo=`svn info $dir | grep "Repository Root:" | cut -d" " -f 3`
 	[[ ${vcs_location} == ${repo} ]]
 	return 
@@ -138,7 +140,9 @@ for repo in ${VCS_DIRS}; do
 
 	shopt -s dotglob
 
-
+    if [[ ! -d $DEST ]]; then 
+        mkdir $DEST
+    fi
 	for files in ${DIR}/* 
 	do
 		
