@@ -1,7 +1,8 @@
+alias yum="sudo -E yum install"
 alias apt-get="sudo -E apt-get"
 alias grep="grep --exclude-dir=.svn"
 alias emerge="sudo -E emerge"
-alias g-cpan="sudo -E g-cpan"
+alias g-cpan="sudo g-cpan"
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
