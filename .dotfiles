@@ -14,10 +14,12 @@ VCS_LOCATION_HOME="git@github.com:goraxe/dotfiles.git"
 CHECKOUT_HOME="${HOME}/dotfiles"
 DEST_HOME="${HOME}"
 
-VCS_LOCATION_CONFIG="git@github.com:goraxe/configfiles.git"
+VCS_LOCATION_CONFIG="https://github.com/goraxe/configfiles.git"
 CHECKOUT_CONFIG="${HOME}/configfiles"
 DEST_CONFIG="${HOME}/.config"
 
 VCS_DIRS="HOME CONFIG"
 
-source "$HOME/.dotfiles.local"
+if [[ -e "$HOME/.dotfiles.local" ]]; then
+    source "$HOME/.dotfiles.local"
+fi
