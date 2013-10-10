@@ -8,8 +8,8 @@ VCS_CREATE_CMD="git clone"
 
 
 VCS_LOCATION="git@github.com:goraxe/dotfiles.git"
-VCS_LOCATION_HOME="git@github.com:goraxe/dotfiles.git"
-VCS_LOCATION_CONFIG="git@github.com:goraxe/configfiles.git"
+VCS_LOCATION_HOME="https://github.com/goraxe/dotfiles.git"
+VCS_LOCATION_CONFIG="https://github.com/goraxe/configfiles.git"
 
 CHECKOUT_HOME="${HOME}/dotfiles"
 DEST_HOME="${HOME}"

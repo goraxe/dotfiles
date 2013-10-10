@@ -10,11 +10,11 @@ VCS_LOCATION_CMD_GREP='grep URL'
 VCS_LOCATION_CMD_CUT="cut -d' ' -f 4"
 
 
-VCS_LOCATION_HOME="git@github.com:goraxe/dotfiles.git"
+VCS_LOCATION_HOME="https://github.com:goraxe/dotfiles.git"
 CHECKOUT_HOME="${HOME}/dotfiles"
 DEST_HOME="${HOME}"
 
-VCS_LOCATION_CONFIG="git@github.com:goraxe/configfiles.git"
+VCS_LOCATION_CONFIG="https://github.com:goraxe/configfiles.git"
 CHECKOUT_CONFIG="${HOME}/configfiles"
 DEST_CONFIG="${HOME}/.config"
 
