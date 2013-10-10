@@ -20,4 +20,6 @@ DEST_CONFIG="${HOME}/.config"
 
 VCS_DIRS="HOME CONFIG"
 
-source "$HOME/.dotfiles.local"
+if [[ -e "$HOME/.dotfiles.local" ]]; then
+    source "$HOME/.dotfiles.local"
+fi

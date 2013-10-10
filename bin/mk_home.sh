@@ -16,9 +16,11 @@ if [[ "${INSTALL_HOST}x" == "x" ]]; then
 fi
 
 
-SSH_OPTS="-o StrictHostKeyChecking=no "
+SSH_OPTS="-o StrictHostKeyChecking=no -A -Y "
 SSH_OPTS="${SSH_OPTS} ${*:2}"
+SOURCE_HOST=$(hostname -f)
 echo "INSTALL_HOST ${INSTALL_HOST}"
+echo "SOURCE_HOST ${SOURCE_HOST}"
 echo "SSH_OPTS ${SSH_OPTS}"
 echo "mkdir bin"
 ssh-copy-id $INSTALL_HOST
@@ -32,10 +34,11 @@ VCS_COMMIT_CMD="git commit -a"
 VCS_CREATE_CMD="git clone"
 
 
-VCS_LOCATION="${USER}@${HOSTNAME}:dotfiles"
-VCS_LOCATION_HOME="${USER}@${HOSTNAME}:dotfiles"
+VCS_LOCATION="${USER}@${SOURCE_HOST}:dotfiles"
+VCS_LOCATION_HOME="${USER}@${SOURCE_HOST}:dotfiles"
 
 CHECKOUT_HOME="\${HOME}/dotfiles"
+DEST_HOME="\${HOME}"
 
 VCS_DIRS="HOME"
 EOT
