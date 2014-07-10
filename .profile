@@ -25,6 +25,10 @@ if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
     PATH="${PATH}:${HOME}/go/bin"
 fi
 
+if [[ -d $HOME/.local/lib/aws/bin || -L $HOME/.local/lib/aws/bin ]] ; then
+    PATH="${PATH}:${HOME}/.local/lib/aws/bin"
+fi
+
 if [[ -d $HOME/perl5/bin || -L $HOME/perl5/bin ]] ; then
     PATH="${PATH}:${HOME}/perl5/bin"
 fi
