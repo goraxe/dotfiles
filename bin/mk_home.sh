@@ -1,7 +1,21 @@
 #!/bin/bash
 
 
-INSTALL_HOST=$1
+
+while [ $1 ] ;  do
+    case $OPT in
+        "-u")
+            shift
+            USER=$1
+            shift
+            ;;
+        *)
+            INSTALL_HOST=$1
+            shift
+            ;;
+    esac
+done
+
 
 function usage {
 echo <<EOT
@@ -24,6 +38,8 @@ echo "SOURCE_HOST ${SOURCE_HOST}"
 echo "SSH_OPTS ${SSH_OPTS}"
 echo "mkdir bin"
 ssh-copy-id $INSTALL_HOST
+
+echo "ssh $INSTALL_HOST ${SSH_OPTS} mkdir bin"
 
 ssh $INSTALL_HOST ${SSH_OPTS} mkdir bin
 echo "copying sync"
