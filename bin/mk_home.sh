@@ -1,11 +1,11 @@
 #!/bin/bash
 
 
-
 while [ $1 ] ;  do
-    case $OPT in
+    case $1 in
         "-u")
             shift
+            echo "user: $1"
             USER=$1
             shift
             ;;
@@ -30,7 +30,7 @@ if [[ "${INSTALL_HOST}x" == "x" ]]; then
 fi
 
 
-SSH_OPTS="-o StrictHostKeyChecking=no -A -Y "
+SSH_OPTS="-o StrictHostKeyChecking=no -A -Y -l $USER"
 SSH_OPTS="${SSH_OPTS} ${*:2}"
 SOURCE_HOST=$(hostname -f)
 echo "INSTALL_HOST ${INSTALL_HOST}"
