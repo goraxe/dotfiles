@@ -105,6 +105,15 @@ set pastetoggle=<F8>
 
 nmap <silent> <C-P> :pop<CR>
 
+" eclim maps
+nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
+nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
+nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
+
+nnoremap <silent> <leader>i :JavaImport<cr>
+nnoremap <silent> <leader>d :JavaDocSearch -x declarations<cr>
+nnoremap <silent> <cr> :JavaSearchContext<cr>
+
 " autocmds
 
 if !exists("autocommands_loaded")
