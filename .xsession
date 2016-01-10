@@ -1,10 +1,12 @@
 #!/bin/bash
 
-echo "xsession is started" >> /home/gordon/log/xsession
+echo "xsession is started" >> ~/log/xsession
 
-export >> /home/gordon/log/xsession
+export >> ~/log/xsession
 
+if [[ -e .xsession.local ]]; then
  source .xsession.local
+fi
 
 xscreensaver &
 awesome
