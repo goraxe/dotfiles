@@ -25,6 +25,15 @@ if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
     PATH="${PATH}:${HOME}/go/bin"
 fi
 
+if [[ -d $HOME/projects/go ]]; then
+    GOPATH="$HOME/projects/go"
+    export GOPATH
+fi
+
+if [[ -d $HOME/projects/go/bin || -L $HOME/projects/go/bin ]] ; then
+    PATH="${PATH}:${HOME}/projects/go/bin"
+fi
+
 if [[ -d $HOME/perl5/bin || -L $HOME/perl5/bin ]] ; then
     PATH="${PATH}:${HOME}/perl5/bin"
 fi
@@ -51,6 +60,20 @@ if [[ -e "$HOME/apache-maven/bin" ]]; then
     PATH="$HOME/apache-maven/bin:$PATH"
 fi
 
-export ANDROID_HOME PATH
+if [[ -e "$HOME/.chefdk/gem/ruby/2.1.0/bin" ]]; then
+    PATH="$PATH:$HOME/.chefdk/gem/ruby/2.1.0/bin"
+fi
+
+if [[ -e "$HOME/usr/lib/pkg-config" ]]; then
+    PKG_CONFIG_PATH="$HOME/usr/lib/pkg-config" 
+fi
+
+if [[ -e "$HOME/usr/lib" ]]; then
+    LD_LIBRARY_PATH=$HOME/usr/lib
+fi
+
+export EDITOR=vim
+
+export ANDROID_HOME PATH PKG_CONFIG_PATH LD_LIBRARY_PATH
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
