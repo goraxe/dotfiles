@@ -22,9 +22,10 @@ SOURCE_HOST=$(hostname -f)
 echo "INSTALL_HOST ${INSTALL_HOST}"
 echo "SOURCE_HOST ${SOURCE_HOST}"
 echo "SSH_OPTS ${SSH_OPTS}"
-echo "mkdir bin"
+echo "copy id:"
 ssh-copy-id $INSTALL_HOST
 
+echo "mkdir bin"
 ssh $INSTALL_HOST ${SSH_OPTS} mkdir bin
 echo "copying sync"
 # we do it this way due to inconsitent -p -P with scp ssh
