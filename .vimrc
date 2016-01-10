@@ -114,6 +114,24 @@ nnoremap <silent> <leader>i :JavaImport<cr>
 nnoremap <silent> <leader>d :JavaDocSearch -x declarations<cr>
 nnoremap <silent> <cr> :JavaSearchContext<cr>
 
+" Vundle
+
+filetype off
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+
+Plugin 'gmarik/vundle'
+Plugin 'https://github.com/elzr/vim-json'
+Plugin 'tpope/vim-surround'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+
+call vundle#end()            " required
+filetype plugin indent on    " required
+
 " autocmds
 
 if !exists("autocommands_loaded")

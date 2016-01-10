@@ -82,3 +82,6 @@ if [[ -e  $HOME/.profile ]]; then
 fi
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"

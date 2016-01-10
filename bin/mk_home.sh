@@ -1,7 +1,21 @@
 #!/bin/bash
 
 
-INSTALL_HOST=$1
+while [ $1 ] ;  do
+    case $1 in
+        "-u")
+            shift
+            echo "user: $1"
+            USER=$1
+            shift
+            ;;
+        *)
+            INSTALL_HOST=$1
+            shift
+            ;;
+    esac
+done
+
 
 function usage {
 echo <<EOT
@@ -16,7 +30,7 @@ if [[ "${INSTALL_HOST}x" == "x" ]]; then
 fi
 
 
-SSH_OPTS="-o StrictHostKeyChecking=no -A -Y "
+SSH_OPTS="-o StrictHostKeyChecking=no -A -Y -l $USER"
 SSH_OPTS="${SSH_OPTS} ${*:2}"
 SOURCE_HOST=$(hostname -f)
 echo "INSTALL_HOST ${INSTALL_HOST}"
@@ -25,7 +39,7 @@ echo "SSH_OPTS ${SSH_OPTS}"
 echo "copy id:"
 ssh-copy-id $INSTALL_HOST
 
-echo "mkdir bin"
+echo "ssh $INSTALL_HOST ${SSH_OPTS} mkdir bin"
 ssh $INSTALL_HOST ${SSH_OPTS} mkdir bin
 echo "copying sync"
 # we do it this way due to inconsitent -p -P with scp ssh

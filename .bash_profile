@@ -21,3 +21,6 @@ fi
 if [ -e ~/.bash_login ] ; then
 	. ~/.bash_login
 fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"

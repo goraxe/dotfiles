@@ -25,6 +25,7 @@ SAVEHIST=1000
 setopt autocd notify
 bindkey -v
 # End of lines configured by zsh-newuser-install
+DISABLE_AUTO_TITLE=true
 
 for file in $HOME/.zsh/*.zsh
 do
@@ -38,3 +39,10 @@ fi
 if [[ -e  $HOME/.profile ]]; then
     source $HOME/.profile
 fi
+
+if [[ -e /etc/zsh_command_not_found ]]; then
+   source /etc/zsh_command_not_found
+fi
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"

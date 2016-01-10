@@ -34,6 +34,10 @@ if [[ -d $HOME/projects/go/bin || -L $HOME/projects/go/bin ]] ; then
     PATH="${PATH}:${HOME}/projects/go/bin"
 fi
 
+if [[ -d $HOME/.local/lib/aws/bin || -L $HOME/.local/lib/aws/bin ]] ; then
+    PATH="${PATH}:${HOME}/.local/lib/aws/bin"
+fi
+
 if [[ -d $HOME/perl5/bin || -L $HOME/perl5/bin ]] ; then
     PATH="${PATH}:${HOME}/perl5/bin"
 fi
@@ -41,6 +45,10 @@ fi
 if [[ -d $HOME/node/bin || -L $HOME/node/bin ]] ; then
     PATH="${PATH}:${HOME}/node/bin"
 fi
+
+#if [[ -d $HOME/.gem/ruby/1.9.1/bin ]]; then
+#    PATH=${PATH}:$HOME/.gem/ruby/1.9.1/bin 
+#fi
 
 if [[ -d $HOME/neo4j/bin || -L $HOME/neo4j/bin ]] ; then
     PATH="${PATH}:${HOME}/neo4j/bin"
@@ -77,3 +85,13 @@ export EDITOR=vim
 export ANDROID_HOME PATH PKG_CONFIG_PATH LD_LIBRARY_PATH
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
+
+#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
+[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
+#if [[ -r $HOME/.rvm/bin ]]; then
+#    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+#fi
