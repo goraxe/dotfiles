@@ -1,4 +1,3 @@
-
 set nocompatible
 set bs=2
 set ts=4
@@ -120,20 +119,42 @@ filetype off
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 
-Plugin 'gmarik/vundle'
-Plugin 'https://github.com/elzr/vim-json'
-Plugin 'tpope/vim-surround'
-Plugin 'tpope/vim-fugitive'
-Plugin 'Lokaltog/vim-easymotion'
-Plugin 'godlygeek/tabular'
-Plugin 'plasticboy/vim-markdown'
+ Plugin 'gmarik/vundle'
+ Plugin 'elzr/vim-json'
+ Plugin 'tpope/vim-surround'
+ Plugin 'tpope/vim-fugitive'
+" Plugin 'Lokaltog/vim-easymotion'
+ Plugin 'godlygeek/tabular'
+ Plugin 'plasticboy/vim-markdown'
 
+
+ "go plugin
+ Plugin 'fatih/vim-go'
+ ""a tagbar
+ Plugin 'majutsushi/tagbar'
+ " syntax checker
+ Plugin 'scrooloose/syntastic'
+
+ Plugin 'jiangmiao/auto-pairs'
+
+ Plugin 'scrooloose/nerdtree'
+
+ Plugin 'Shougo/neocomplete.vim'
+
+ Plugin 'weynhamz/vim-plugin-minibufexpl'
+" Plugin 'tpope/vim-fugitive'
+ Plugin 'airblade/vim-gitgutter'
+ Plugin 'xolox/vim-misc'
+ Plugin 'xolox/vim-shell'
+ Plugin 'tomtom/quickfixsigns_vim'
+ Plugin 'SirVer/ultisnips'
+
+ Plugin 'honza/vim-snippets'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
 
 " autocmds
-
 if !exists("autocommands_loaded")
 	let autocommands_loaded = 1
 " for plain text files
