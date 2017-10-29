@@ -130,6 +130,10 @@ call plug#begin()
  Plug 'godlygeek/tabular'
  Plug 'plasticboy/vim-markdown'
 
+ " Plugins for angular
+ Plug 'leafgarland/typescript-vim'
+ Plug 'Quramy/vim-js-pretty-template'
+ Plug 'Quramy/tsuquyomi' 
 
  "go plugin
  Plug 'fatih/vim-go'
