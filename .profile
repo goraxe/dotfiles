@@ -46,9 +46,13 @@ if [[ -d $HOME/node/bin || -L $HOME/node/bin ]] ; then
     PATH="${PATH}:${HOME}/node/bin"
 fi
 
-#if [[ -d $HOME/.gem/ruby/1.9.1/bin ]]; then
-#    PATH=${PATH}:$HOME/.gem/ruby/1.9.1/bin 
-#fi
+if [[ -d $HOME/.yarn/bin || -L $HOME/.yarn/bin ]] ; then
+    PATH="${PATH}:${HOME}/.yarn/bin"
+fi
+
+if [[ -d $HOME/.gem/ruby/2.3.0/bin ]]; then
+    PATH=${PATH}:$HOME/.gem/ruby/2.3.0/bin
+fi
 
 if [[ -d $HOME/neo4j/bin || -L $HOME/neo4j/bin ]] ; then
     PATH="${PATH}:${HOME}/neo4j/bin"
