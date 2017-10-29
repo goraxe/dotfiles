@@ -85,7 +85,8 @@ set spelllang=en_gb
 	"linux
 		let g:dbext_default_profile_filesdb = ''
 	endif
-
+    " disable eclim
+    let g:EclimDisabled=1
 " functions
 
 function! PlainTextFile ()
@@ -116,43 +117,47 @@ nnoremap <silent> <cr> :JavaSearchContext<cr>
 " Vundle
 
 filetype off
-set rtp+=~/.vim/bundle/Vundle.vim
-call vundle#begin()
+call plug#begin()
 
- Plugin 'gmarik/vundle'
- Plugin 'elzr/vim-json'
- Plugin 'tpope/vim-surround'
- Plugin 'tpope/vim-fugitive'
-" Plugin 'Lokaltog/vim-easymotion'
- Plugin 'godlygeek/tabular'
- Plugin 'plasticboy/vim-markdown'
+ Plug 'elzr/vim-json'
+
+ " general text object plugins
+ Plug 'junegunn/vim-easy-align'
+ Plug 'tpope/vim-surround'
+ 
+ Plug 'tpope/vim-fugitive'
+" Plug 'Lokaltog/vim-easymotion'
+ Plug 'godlygeek/tabular'
+ Plug 'plasticboy/vim-markdown'
 
 
  "go plugin
- Plugin 'fatih/vim-go'
+ Plug 'fatih/vim-go'
  ""a tagbar
- Plugin 'majutsushi/tagbar'
+ Plug 'majutsushi/tagbar'
  " syntax checker
- Plugin 'scrooloose/syntastic'
+ Plug 'scrooloose/syntastic'
 
- Plugin 'jiangmiao/auto-pairs'
+ Plug 'jiangmiao/auto-pairs'
 
- Plugin 'scrooloose/nerdtree'
+ Plug 'scrooloose/nerdtree'
 
- Plugin 'Shougo/neocomplete.vim'
+ Plug 'Shougo/neocomplete.vim'
 
- Plugin 'weynhamz/vim-plugin-minibufexpl'
-" Plugin 'tpope/vim-fugitive'
- Plugin 'airblade/vim-gitgutter'
- Plugin 'xolox/vim-misc'
- Plugin 'xolox/vim-shell'
- Plugin 'tomtom/quickfixsigns_vim'
- Plugin 'SirVer/ultisnips'
+ Plug 'weynhamz/vim-plugin-minibufexpl'
+" Plug 'tpope/vim-fugitive'
+ Plug 'airblade/vim-gitgutter'
+ Plug 'xolox/vim-misc'
+ Plug 'xolox/vim-shell'
+ Plug 'tomtom/quickfixsigns_vim'
+ Plug 'SirVer/ultisnips'
 
- Plugin 'honza/vim-snippets'
+ Plug 'honza/vim-snippets'
 
-call vundle#end()            " required
+call plug#end()            " required
 filetype plugin indent on    " required
+
+
 
 " autocmds
 if !exists("autocommands_loaded")
