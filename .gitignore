@@ -8,3 +8,4 @@
 .vim/GetLatest/GetLatestVimScripts.dist
 .vim/contrib
 .vim/bundle
+.vim/plugged
