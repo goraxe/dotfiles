@@ -164,21 +164,31 @@ filetype plugin indent on    " required
 
 
 " autocmds
-if !exists("autocommands_loaded")
-	let autocommands_loaded = 1
-" for plain text files
+augroup filetype
+    " for plain text files
+    autocmd!
 	au BufNewFile,BufRead *.txt call PlainTextFile()
 " for perl test files
 	au BufNewFile,BufRead *.t setfiletype=perl
 
+    autocmd FileType javascript setlocal sw=2 ts=2
+    autocmd FileType json setlocal sw=2 ts=2
 
 	autocmd BufEnter * let &titlestring = "[" . system("whoami") ."](". expand("%:t") . ")"
-	if &term == "screen" || &term == "screen-256color"
-		set t_ts=k
-		set t_fs=\
-	endif
-	if &term == "screen" || &term == "screen-256color" || &term == "xterm"
-		set title
-	endif
+augroup end
+
+augroup filetype_go
+    autocmd!
+    autocmd Syntax go normal zR
+    au FileType go nmap <leader>r <Plug>(go-run-split)
+augroup end
+
+if &term == "screen" || &term == "screen-256color"
+    set t_ts=k
+    set t_fs=\
 endif
+if &term == "screen" || &term == "screen-256color" || &term == "xterm"
+    set title
+endif
+
 filetype plugin indent on
