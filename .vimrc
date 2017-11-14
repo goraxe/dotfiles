@@ -8,9 +8,9 @@ syntax on
 set autowrite
 set modeline
 
-if has("netbeans_intg")
-	set autochdir
-endif
+"if has("netbeans_intg")
+"	set autochdir
+"endif
 
 set number
 
@@ -105,14 +105,6 @@ set pastetoggle=<F8>
 
 nmap <silent> <C-P> :pop<CR>
 
-" eclim maps
-nnoremap <silent> <buffer> <leader>i :JavaImport<cr>
-nnoremap <silent> <buffer> <leader>d :JavaDocSearch -x declarations<cr>
-nnoremap <silent> <buffer> <cr> :JavaSearchContext<cr>
-
-nnoremap <silent> <leader>i :JavaImport<cr>
-nnoremap <silent> <leader>d :JavaDocSearch -x declarations<cr>
-nnoremap <silent> <cr> :JavaSearchContext<cr>
 
 " Vundle
 
@@ -134,6 +126,9 @@ call plug#begin()
  Plug 'leafgarland/typescript-vim'
  Plug 'Quramy/vim-js-pretty-template'
  Plug 'Quramy/tsuquyomi' 
+
+ " Plugins for java
+ Plug 'artur-shaik/vim-javacomplete2'
 
  "go plugin
  Plug 'fatih/vim-go'
@@ -181,6 +176,16 @@ augroup filetype_go
     autocmd!
     autocmd Syntax go normal zR
     au FileType go nmap <leader>r <Plug>(go-run-split)
+augroup end
+
+augroup filetype_java
+    autocmd!
+    autocmd Syntax java normal zR
+
+    set noautochdir
+    autocmd FileType java setlocal omnifunc=javacomplete#Complete
+
+    "au FileType java nmap <leader>r <Plug>(go-run-split)
 augroup end
 
 if &term == "screen" || &term == "screen-256color"
