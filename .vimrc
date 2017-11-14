@@ -20,11 +20,11 @@ set expandtab
 " display
 " set columns=80
 
-set background=dark
-colorscheme desert
+"set background=dark
+"colorscheme desert
 
-highlight Folded guibg=grey50 guifg=blue
-highlight FoldColumn guibg=grey30 guifg=darkblue
+"highlight Folded guibg=grey50 guifg=blue
+"highlight FoldColumn guibg=grey30 guifg=darkblue
 
 
 set foldcolumn=2
@@ -141,22 +141,38 @@ call plug#begin()
 
  Plug 'scrooloose/nerdtree'
 
- Plug 'Shougo/neocomplete.vim'
+ " deoplete and deps
+ Plug 'Shougo/deoplete.nvim'
+ Plug 'roxma/nvim-yarp'
+ Plug 'roxma/vim-hug-neovim-rpc'
 
  Plug 'weynhamz/vim-plugin-minibufexpl'
-" Plug 'tpope/vim-fugitive'
+
  Plug 'airblade/vim-gitgutter'
  Plug 'xolox/vim-misc'
  Plug 'xolox/vim-shell'
  Plug 'tomtom/quickfixsigns_vim'
- Plug 'SirVer/ultisnips'
 
+ " Snippets
+ Plug 'SirVer/ultisnips'
  Plug 'honza/vim-snippets'
+ Plug 'jvanja/vim-bootstrap4-snippets'
+
+ " colorscheme
+ Plug 'nightsense/vimspectr'
+ Plug 'jacoborus/tender.vim'
 
 call plug#end()            " required
+
+
+
+let g:vimspectr30curve_dark_StatusLine = 'yellow'
+colorscheme tender
+
 filetype plugin indent on    " required
 
-
+" Use deoplete.
+let g:deoplete#enable_at_startup = 1
 
 " autocmds
 augroup filetype
