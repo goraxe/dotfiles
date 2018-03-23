@@ -121,6 +121,9 @@ call plug#begin()
 
  Plug 'elzr/vim-json'
 
+ " Language pack
+ Plug 'sheerun/vim-polyglot'
+
  " general text object plugins
  Plug 'junegunn/vim-easy-align'
  Plug 'tpope/vim-surround'
