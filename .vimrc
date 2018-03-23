@@ -224,6 +224,12 @@ augroup filetype_java
     "au FileType java nmap <leader>r <Plug>(go-run-split)
 augroup end
 
+augroup filetype_ts
+    autocmd!
+    autocmd Filetype typescript normal zR
+    autocmd FileType typescript setlocal sw=2 ts=2
+augroup end
+
 if &term == "screen" || &term == "screen-256color"
     set t_ts=k
     set t_fs=\
