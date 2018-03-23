@@ -74,9 +74,10 @@ set spelllang=en_gb
 	let g:miniBufExplMapCTabSwitchBufs = 1
 	let g:miniBufExplModSelTarget = 1
 
-    " options for VimOrganizer
-    au! BufRead,BufWrite,BufWritePost,BufNewFile *.org 
-    au BufEnter *.org            call org#SetOrgFileType()
+
+	" options for VimOrganizer
+	au! BufRead,BufWrite,BufWritePost,BufNewFile *.org
+	au BufEnter *.org            call org#SetOrgFileType()
 
 	" dbext profiles
 	" win32
