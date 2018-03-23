@@ -124,6 +124,9 @@ call plug#begin()
  " Language pack
  Plug 'sheerun/vim-polyglot'
 
+ " Organisation and Todo
+ Plug 'jceb/vim-orgmode'
+
  " general text object plugins
  Plug 'junegunn/vim-easy-align'
  Plug 'tpope/vim-surround'
