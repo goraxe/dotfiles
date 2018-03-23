@@ -143,6 +143,13 @@ call plug#begin()
 
  "go plugin
  Plug 'fatih/vim-go'
+ Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh'  }
+ Plug 'zchee/deoplete-go', { 'do': 'make' }
+ Plug 'Shougo/vimshell.vim'
+ Plug 'Shougo/vimproc.vim', {'do' : 'make'}
+ Plug 'sebdah/vim-delve'
+
+
  ""a tagbar
  Plug 'majutsushi/tagbar'
  " syntax checker
