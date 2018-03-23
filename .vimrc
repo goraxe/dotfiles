@@ -192,6 +192,8 @@ filetype plugin indent on    " required
 " Use deoplete.
 let g:deoplete#enable_at_startup = 1
 
+let g:JavaComplete_GradleExecutable = 'gradle'
+
 " autocmds
 augroup filetype
     " for plain text files
