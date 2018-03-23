@@ -112,6 +112,13 @@ nmap <silent> <C-P> :pop<CR>
 filetype off
 call plug#begin()
 
+
+ " Utilites
+ Plug 'airblade/vim-rooter'
+ Plug 'universal-ctags/ctags'
+ Plug 'craigemery/vim-autotag'
+ Plug 'xolox/vim-easytags'
+
  Plug 'elzr/vim-json'
 
  " general text object plugins
