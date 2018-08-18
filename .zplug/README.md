@@ -45,7 +45,7 @@ latest | stable
 ### The best way
 
 ```console
-$ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh| zsh
+$ curl -sL --proto-redir -all,https https://raw.githubusercontent.com/zplug/installer/master/installer.zsh | zsh
 ```
 
 Curious about the installation script? Check it out at [zplug/installer](https://github.com/zplug/installer/blob/master/installer.zsh).
@@ -251,8 +251,8 @@ All that's left is to run `zplug update`.
 | `rename-to`   | Specify the filename you want to rename the command to (use this only with `as:command`) | *filename* (-) | `rename-to:fzf` |
 | `dir`         | Installed directory of the package | **READ ONLY** | `dir:/path/to/user/repo` |
 | `if`          | Specify the conditions under which to install and use the package | *boolean* (-) | `if:"[ -d ~/.zsh ]"` |
-| `hook-build`  | Commands to after installation/update | *commands* (-) | `hook-build:"make install"` |
-| `hook-load`   | Commands to after loading | *commands* (-) | `hook-load:"echo 'Loaded!'"` |
+| `hook-build`  | Commands to run after installation/update | *commands* (-) | `hook-build:"make install"` |
+| `hook-load`   | Commands to run after loading | *commands* (-) | `hook-load:"echo 'Loaded!'"` |
 | `frozen`      | Do not update unless explicitly specified | truthy,falsy (false) | `frozen:1` |
 | `on`          | Load this package only if a different package is installed | *package* | `on:user/repo` |
 | `defer`        | Defers the loading of a package. If the value is 2 or above, zplug will source the plugin after `compinit` (see also [#26](https://github.com/zplug/zplug/issues/26)) | 0..3 (0) | `defer:2` |
@@ -347,6 +347,14 @@ Defaults to `$ZPLUG_HOME/repos`. You can change where the repositories are clone
 #### `ZPLUG_SUDO_PASSWORD`
 
 Defaults to `''`. You can set sudo password for zplug's `hook-build` tag. However, this variable should not be managed in dotfiles and so on.
+
+#### `ZPLUG_LOG_LOAD_SUCCESS`
+
+Defaults to `false`. If true, zplug spit the log about its success operation out to file (you can see it with `zplug --log`).
+
+#### `ZPLUG_LOG_LOAD_FAILURE`
+
+Defaults to `false`. If true, zplug spit the log about its failure operation out to file (you can see it with `zplug --log`).
 
 ```zsh
 # your .zshrc

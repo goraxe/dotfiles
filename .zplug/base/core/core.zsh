@@ -88,24 +88,6 @@ __zplug::core::core::run_interfaces()
 
 __zplug::core::core::prepare()
 {
-    # Unique array
-    typeset -gx -U path
-    typeset -gx -U fpath
-
-    # Add to the PATH
-    path=(
-    ${ZPLUG_ROOT:+"$ZPLUG_ROOT/bin"}
-    ${ZPLUG_BIN:-"$ZPLUG_HOME/bin"}
-    "$path[@]"
-    )
-
-    # Add to the FPATH
-    fpath=(
-    "$ZPLUG_ROOT"/misc/completions(N-/)
-    "$ZPLUG_ROOT/base/sources"
-    "$fpath[@]"
-    )
-
     # Check whether you meet the requirements for using zplug
     # 1. zsh 4.3.9 or more
     # 2. git
@@ -144,6 +126,24 @@ __zplug::core::core::prepare()
     # Release zplug variables and export
     __zplug::core::core::variable || return 1
 
+    # Unique array
+    typeset -gx -U path
+    typeset -gx -U fpath
+
+    # Add to the PATH
+    path=(
+    ${ZPLUG_ROOT:+"$ZPLUG_ROOT/bin"}
+    ${ZPLUG_BIN:-${ZPLUG_HOME:+"$ZPLUG_HOME/bin"}}
+    "$path[@]"
+    )
+
+    # Add to the FPATH
+    fpath=(
+    "$ZPLUG_ROOT"/misc/completions(N-/)
+    "$ZPLUG_ROOT/base/sources"
+    "$fpath[@]"
+    )
+
     mkdir -p "$ZPLUG_HOME"/{,log}
     mkdir -p "$ZPLUG_BIN"
     mkdir -p "$ZPLUG_CACHE_DIR"
@@ -171,6 +171,8 @@ __zplug::core::core::variable()
     typeset -gx    ZPLUG_SUDO_PASSWORD
 
     typeset -gx    ZPLUG_ERROR_LOG=${ZPLUG_ERROR_LOG:-$ZPLUG_HOME/.error_log}
+    typeset -gx    ZPLUG_LOG_LOAD_SUCCESS=${ZPLUG_LOG_LOAD_SUCCESS:-false}
+    typeset -gx    ZPLUG_LOG_LOAD_FAILURE=${ZPLUG_LOG_LOAD_FAILURE:-false}
 
     typeset -gx    ZPLUG_BIN=${ZPLUG_BIN:-$ZPLUG_HOME/bin}
     typeset -gx    ZPLUG_CACHE_DIR=${ZPLUG_CACHE_DIR:-$ZPLUG_HOME/cache}
