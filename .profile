@@ -13,12 +13,16 @@ if [[ -r ${HOME}/.profile.local ]]; then
     source ${HOME}/.profile.local
 fi
 
+if [[ $(uname -s) -eq "Darwin" ]]; then
+    PATH="/usr/local/bin:$PATH"
+fi
+
 if [[ -d ${HOME}/bin || -L ${HOME}/bin ]] ; then
-    PATH="${PATH}:${HOME}/bin"
+    PATH="${HOME}/bin:${PATH}"
 fi
 
 if [[ -d ${HOME}/bin.local || -L ${HOME}/bin.local ]] ; then
-    PATH="${PATH}:${HOME}/bin.local"
+    PATH="${HOME}/bin.local:${PATH}"
 fi
 
 if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
