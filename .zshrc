@@ -1,5 +1,9 @@
 # The following lines were added by compinstall
 
+if [[ -e /usr/local/share/zsh/functions ]]; then
+    export FPATH=$FPATH:/usr/local/share/zsh/functions
+fi
+
 zstyle ':completion:*' completer _list _oldlist _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' format '---> %d:'
@@ -48,6 +52,7 @@ if [[ -e /etc/zsh_command_not_found ]]; then
    source /etc/zsh_command_not_found
 fi
 
+zplug "zplug/zplug"
 zplug "~/.zsh", from:local
 
 zplug "zsh-users/zsh-autosuggestions"
@@ -64,6 +69,8 @@ zplug "stedolan/jq", \
     rename-to:jq
 zplug "b4b4r07/emoji-cli", \
     on:"stedolan/jq"
+
+zplug "plugins/ng", from:oh-my-zsh
 
 #zplug "themes/johnathan", from:oh-my-zsh
 zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
