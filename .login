@@ -22,6 +22,9 @@ function do_ssh_add {
 
 # if we already set things up lets do it again
 [ ! -z "$LOGGED_IN" ] && return
+if [[ ! -z "$SESSION_MANAGER" ]]; then 
+    return
+fi
 
 function have_agent_connection {
     local __resultvar=$1
