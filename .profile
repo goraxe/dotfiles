@@ -88,6 +88,10 @@ if [[ -e "$HOME/usr/lib" ]]; then
     LD_LIBRARY_PATH=$HOME/usr/lib
 fi
 
+if [[ -e "$HOME/.tfenv/bin" ]]; then
+    PATH="$PATH:$HOME/.tfenv/bin"
+fi
+
 export EDITOR=vim
 
 export ANDROID_HOME PATH PKG_CONFIG_PATH LD_LIBRARY_PATH
