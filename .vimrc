@@ -118,6 +118,7 @@ call plug#begin()
  Plug 'universal-ctags/ctags'
  Plug 'craigemery/vim-autotag'
  Plug 'xolox/vim-easytags'
+ Plug 'ruanyl/coverage.vim'
 
  Plug 'elzr/vim-json'
 
@@ -152,8 +153,10 @@ call plug#begin()
  Plug 'Shougo/vimproc.vim', {'do' : 'make'}
  Plug 'sebdah/vim-delve'
 
+ " coc
+ Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
 
- ""a tagbar
+ "a tagbar
  Plug 'majutsushi/tagbar'
  " syntax checker
  Plug 'scrooloose/syntastic'
@@ -196,6 +199,21 @@ filetype plugin indent on    " required
 let g:deoplete#enable_at_startup = 1
 
 let g:JavaComplete_GradleExecutable = 'gradle'
+
+inoremap <silent><expr> <TAB>
+      \ pumvisible() ? "\<C-n>" :
+      \ <SID>check_back_space() ? "\<TAB>" :
+      \ coc#refresh()
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+function! s:check_back_space() abort
+  let col = col('.') - 1
+  return !col || getline('.')[col - 1]  =~# '\s'
+endfunction
+
+" Use <c-space> to trigger completion.
+inoremap <silent><expr> <c-space> coc#refresh()
+
 
 " autocmds
 augroup filetype

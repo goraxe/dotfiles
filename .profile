@@ -13,12 +13,16 @@ if [[ -r ${HOME}/.profile.local ]]; then
     source ${HOME}/.profile.local
 fi
 
+if [[ $(uname -s) -eq "Darwin" ]]; then
+    PATH="/usr/local/bin:$PATH"
+fi
+
 if [[ -d ${HOME}/bin || -L ${HOME}/bin ]] ; then
-    PATH="${PATH}:${HOME}/bin"
+    PATH="${HOME}/bin:${PATH}"
 fi
 
 if [[ -d ${HOME}/bin.local || -L ${HOME}/bin.local ]] ; then
-    PATH="${PATH}:${HOME}/bin.local"
+    PATH="${HOME}/bin.local:${PATH}"
 fi
 
 if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
@@ -99,3 +103,7 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 #if [[ -r $HOME/.rvm/bin ]]; then
 #    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 #fi
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
