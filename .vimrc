@@ -1,3 +1,11 @@
+" vim: et sw=2 ts=2 foldmethod=marker
+
+" {{{ settings 
+set hidden
+set cmdheight=2
+set shortmess+=c
+
+
 set nocompatible
 set bs=2
 set ts=4
@@ -42,10 +50,12 @@ set clipboard=unnamed
 syn spell toplevel
 set spelllang=en_gb
 
-" Plugin options
+
+" }}} 
+" {{{ Plugin options
 	"GetLatest
 	let g:GetLatestVimScripts_options=""
-	
+
 	" TagList
 	let Tlist_Close_On_Select			= 1
     let Tlist_Auto_Open = 0
@@ -82,7 +92,7 @@ set spelllang=en_gb
 	" dbext profiles
 	" win32
 	if has("win32")
-	else 
+	else
 	"linux
 		let g:dbext_default_profile_filesdb = ''
 	endif
@@ -91,47 +101,54 @@ set spelllang=en_gb
 " functions
 
 function! PlainTextFile ()
-	set wrapmargin=8 
+	set wrapmargin=8
 	set nolist
 	set nonumber
 endfunction
 
-" maps
+" }}}
+" {{{ maps
 nmap gf :vs <cfile><CR>
 nmap <silent> <F2> :set invlist<CR>:set invnumber<CR>:set invfoldenable<CR>
 nmap <silent> <F3> :set invhls<CR>
-nmap <silent> <F7> :TlistToggle<CR>
+nmap <silent> <F7> :NERDTreeToggle<CR>:TagbarToggle<CR>
 nmap <silent> <F6> :set invspell<CR>
 set pastetoggle=<F8>
 
 nmap <silent> <C-P> :pop<CR>
-
-
-" Vundle
+" }}}
+" {{{ Plugins
 
 filetype off
 call plug#begin()
 
 
- " Utilites
- Plug 'airblade/vim-rooter'
- Plug 'universal-ctags/ctags'
- Plug 'craigemery/vim-autotag'
- Plug 'xolox/vim-easytags'
- Plug 'ruanyl/coverage.vim'
+" {{{ Utilites
 
- Plug 'elzr/vim-json'
+  Plug 'airblade/vim-rooter'
+  Plug 'universal-ctags/ctags'
+  Plug 'craigemery/vim-autotag'
+  Plug 'xolox/vim-easytags'
+  Plug 'ruanyl/coverage.vim'
+  Plug 'vim-airline/vim-airline'
+  Plug 'bkad/CamelCaseMotion'
+  Plug 'jiangmiao/auto-pairs'
 
- " Language pack
+  Plug 'tpope/vim-commentary'
+
+  " general text object plugins
+  Plug 'junegunn/vim-easy-align'
+  Plug 'tpope/vim-surround'
+" }}}
+
+  Plug 'elzr/vim-json'
+" Language pack
  Plug 'sheerun/vim-polyglot'
 
  " Organisation and Todo
  Plug 'jceb/vim-orgmode'
 
- " general text object plugins
- Plug 'junegunn/vim-easy-align'
- Plug 'tpope/vim-surround'
- 
+
  Plug 'tpope/vim-fugitive'
 " Plug 'Lokaltog/vim-easymotion'
  Plug 'godlygeek/tabular'
@@ -140,7 +157,7 @@ call plug#begin()
  " Plugins for angular
  Plug 'leafgarland/typescript-vim'
  Plug 'Quramy/vim-js-pretty-template'
- Plug 'Quramy/tsuquyomi' 
+ Plug 'Quramy/tsuquyomi'
 
  " Plugins for java
  Plug 'artur-shaik/vim-javacomplete2'
@@ -154,14 +171,13 @@ call plug#begin()
  Plug 'sebdah/vim-delve'
 
  " coc
- Plug 'neoclide/coc.nvim', {'tag': '*', 'do': './install.sh'}
+ Plug 'neoclide/coc.nvim', { 'branch': 'release'  }
 
  "a tagbar
  Plug 'majutsushi/tagbar'
  " syntax checker
  Plug 'scrooloose/syntastic'
 
- Plug 'jiangmiao/auto-pairs'
 
  Plug 'scrooloose/nerdtree'
 
@@ -178,7 +194,7 @@ call plug#begin()
  Plug 'tomtom/quickfixsigns_vim'
 
  " Snippets
- Plug 'SirVer/ultisnips'
+ " Plug 'SirVer/ultisnips'
  Plug 'honza/vim-snippets'
  Plug 'jvanja/vim-bootstrap4-snippets'
 
@@ -187,19 +203,38 @@ call plug#begin()
  Plug 'jacoborus/tender.vim'
 
 call plug#end()            " required
-
-
-
+" }}}
+" {{{ Plugin Settings
+" {{{
+"map <Leader>ap 
+let g:AutoPairsShortcutToggle ='<leader>ap'
+" }}}
+" {{{ CamelCaseMotion 
+let g:camelcasemotion_key = '<leader>'
+" }}}
+" {{{ vimsectr 
 let g:vimspectr30curve_dark_StatusLine = 'yellow'
-colorscheme tender
+" }}}
+" {{{ easy-align 
+   " Start interactive EasyAlign in visual mode (e.g. vipga)
+xmap ga <Plug>(EasyAlign)
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign) 
+" }}}
+" {{{ go-vim
 
-filetype plugin indent on    " required
+    let g:go_code_completion_enabled = 0
+    let g:go_def_mapping_enabled     = 0
+    let g:go_textobj_enabled         = 0
 
-" Use deoplete.
-let g:deoplete#enable_at_startup = 1
-
+" }}}
+" {{{ deoplete.
+let g:deoplete#enable_at_startup = 0
+" }}}
+" {{{ JavaComplete
 let g:JavaComplete_GradleExecutable = 'gradle'
-
+" }}}
+" {{{ coc 
 inoremap <silent><expr> <TAB>
       \ pumvisible() ? "\<C-n>" :
       \ <SID>check_back_space() ? "\<TAB>" :
@@ -215,7 +250,107 @@ endfunction
 inoremap <silent><expr> <c-space> coc#refresh()
 
 
-" autocmds
+" Use `[g` and `]g` to navigate diagnostics
+nmap <silent> [g <Plug>(coc-diagnostic-prev)
+nmap <silent> ]g <Plug>(coc-diagnostic-next)
+
+" Remap keys for gotos
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Use K to show documentation in preview window
+nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+function! s:show_documentation()
+  if (index(['vim','help'], &filetype) >= 0)
+    execute 'h '.expand('<cword>')
+  else
+    call CocAction('doHover')
+  endif
+endfunction
+
+" Highlight symbol under cursor on CursorHold
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
+
+" Remap for format selected region
+xmap <leader>f  <Plug>(coc-format-selected)
+nmap <leader>f  <Plug>(coc-format-selected)
+
+augroup mygroup
+  autocmd!
+  " Setup formatexpr specified filetype(s).
+  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
+  " Update signature help on jump placeholder
+  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
+augroup end
+
+" Remap for do codeAction of selected region, ex: `<leader>aap` for current paragraph
+xmap <leader>a  <Plug>(coc-codeaction-selected)
+nmap <leader>a  <Plug>(coc-codeaction-selected)
+
+" Remap for do codeAction of current line
+nmap <leader>ac  <Plug>(coc-codeaction)
+" Fix autofix problem of current line
+nmap <leader>qf  <Plug>(coc-fix-current)
+
+" Create mappings for function text object, requires document symbols feature of languageserver.
+xmap if <Plug>(coc-funcobj-i)
+xmap af <Plug>(coc-funcobj-a)
+omap if <Plug>(coc-funcobj-i)
+omap af <Plug>(coc-funcobj-a)
+
+" Use <C-d> for select selections ranges, needs server support, like: coc-tsserver, coc-python
+nmap <silent> <C-d> <Plug>(coc-range-select)
+xmap <silent> <C-d> <Plug>(coc-range-select)
+
+" Use `:Format` to format current buffer
+command! -nargs=0 Format :call CocAction('format')
+
+" Use `:Fold` to fold current buffer
+command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+
+" use `:OR` for organize import of current buffer
+command! -nargs=0 OR   :call     CocAction('runCommand', 'editor.action.organizeImport')
+
+" Add status line support, for integration with other plugin, checkout `:h coc-status`
+" set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
+
+" Using CocList
+" Show all diagnostics
+nnoremap <silent> <space>a  :<C-u>CocList diagnostics<cr>
+" Manage extensions
+nnoremap <silent> <space>e  :<C-u>CocList extensions<cr>
+" Show commands
+nnoremap <silent> <space>c  :<C-u>CocList commands<cr>
+" Find symbol of current document
+nnoremap <silent> <space>o  :<C-u>CocList outline<cr>
+" Search workspace symbols
+nnoremap <silent> <space>s  :<C-u>CocList -I symbols<cr>
+" Do default action for next item.
+nnoremap <silent> <space>j  :<C-u>CocNext<CR>
+" Do default action for previous item.
+nnoremap <silent> <space>k  :<C-u>CocPrev<CR>
+" Resume latest coc list
+nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
+
+"{{{
+ let g:airline#extensions#coc#enabled = 1
+"}}}
+
+" coc }}}
+
+"{{{ tagbar
+
+let g:tagbar_compact = 1
+
+"}}}
+" Plugin Settings }}}
+" {{{ autocmds
 augroup filetype
     " for plain text files
     autocmd!
@@ -250,7 +385,8 @@ augroup filetype_ts
     autocmd Filetype typescript normal zR
     autocmd FileType typescript setlocal sw=2 ts=2
 augroup end
-
+" }}}
+" {{{ final settings
 if &term == "screen" || &term == "screen-256color"
     set t_ts=k
     set t_fs=\
@@ -260,3 +396,5 @@ if &term == "screen" || &term == "screen-256color" || &term == "xterm"
 endif
 
 filetype plugin indent on
+colorscheme tender
+" }}}
