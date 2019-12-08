@@ -62,6 +62,17 @@ zplug "plugins/git",   from:oh-my-zsh
 zplug "plugins/gradle",   from:oh-my-zsh
 zplug "plugins/zsh_reload",   from:oh-my-zsh
 zplug "plugins/per-directory-history", from:oh-my-zsh
+zplug "plugins/tmux", from:oh-my-zsh
+zplug "plugins/docker-compose", from:oh-my-zsh
+zplug "plugins/dotenv", from:oh-my-zsh # interesting alternatives https://github.com/direnv/direnv & https://github.com/Tarrasch/zsh-autoenv
+zplug "plugins/golang", from:oh-my-zsh
+zplug "plugins/helm", from:oh-my-zsh
+zplug "plugins/kubectl", from:oh-my-zsh
+zplug "plugins/emoji", from:oh-my-zsh
+
+# TODO
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
+# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-extras
 
 zplug "stedolan/jq", \
     from:gh-r, \
