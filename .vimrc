@@ -27,7 +27,6 @@ set expandtab
 
 " display
 " set columns=80
-
 "set background=dark
 "colorscheme desert
 
@@ -130,7 +129,6 @@ call plug#begin()
   Plug 'craigemery/vim-autotag'
   Plug 'xolox/vim-easytags'
   Plug 'ruanyl/coverage.vim'
-  Plug 'vim-airline/vim-airline'
   Plug 'bkad/CamelCaseMotion'
   Plug 'jiangmiao/auto-pairs'
 
@@ -139,6 +137,12 @@ call plug#begin()
   " general text object plugins
   Plug 'junegunn/vim-easy-align'
   Plug 'tpope/vim-surround'
+" }}}
+
+" {{{ statusline
+  Plug 'vim-airline/vim-airline'
+  Plug 'vim-airline/vim-airline-themes'
+  Plug 'edkolev/tmuxline.vim'
 " }}}
 
   Plug 'elzr/vim-json'
@@ -194,13 +198,14 @@ call plug#begin()
  Plug 'tomtom/quickfixsigns_vim'
 
  " Snippets
- " Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
  Plug 'honza/vim-snippets'
  Plug 'jvanja/vim-bootstrap4-snippets'
 
  " colorscheme
  Plug 'nightsense/vimspectr'
  Plug 'jacoborus/tender.vim'
+ Plug 'lifepillar/vim-solarized8'
 
 call plug#end()            " required
 " }}}
@@ -349,6 +354,26 @@ nnoremap <silent> <space>p  :<C-u>CocListResume<CR>
 let g:tagbar_compact = 1
 
 "}}}
+
+"{{{ airline
+let g:airline_powerline_fonts=1
+
+if (has("termguicolors"))
+  set termguicolors
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum""]"
+endif
+
+let g:tmuxline_preset = {
+      \'a'    : '#S',
+      \'b'    : [ '#{prefix}', '#{pane_current_path}' ],
+      \'win'  : ['#I', '#W'],
+      \'cwin' : ['#I', '#W', '#F'],
+      \'y'    : ['%R', '%a', '%Y'],
+      \'z'    : '#H'}
+
+"}}}
+
 " Plugin Settings }}}
 " {{{ autocmds
 augroup filetype
@@ -396,5 +421,7 @@ if &term == "screen" || &term == "screen-256color" || &term == "xterm"
 endif
 
 filetype plugin indent on
-colorscheme tender
+"colorscheme tender
+colorscheme solarized8
+set background=dark
 " }}}
