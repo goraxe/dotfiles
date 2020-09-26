@@ -120,3 +120,7 @@ export SDKMAN_DIR="/home/goraxe/.sdkman"
 [[ -s "/home/goraxe/.sdkman/bin/sdkman-init.sh" ]] && source "/home/goraxe/.sdkman/bin/sdkman-init.sh"
 
 [[ -s "/home/goraxe/.gvm/scripts/gvm" ]] && source "/home/goraxe/.gvm/scripts/gvm"
+
+# added by travis gem
+[ -f /home/goraxe/.travis/travis.sh ] && source /home/goraxe/.travis/travis.sh
+
