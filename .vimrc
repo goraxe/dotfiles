@@ -167,7 +167,7 @@ call plug#begin()
  Plug 'artur-shaik/vim-javacomplete2'
 
  "go plugin
- Plug 'fatih/vim-go'
+ "Plug 'fatih/vim-go'
  Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh'  }
  Plug 'zchee/deoplete-go', { 'do': 'make' }
  Plug 'Shougo/vimshell.vim'
@@ -176,6 +176,7 @@ call plug#begin()
 
  " coc
  Plug 'neoclide/coc.nvim', { 'branch': 'release'  }
+ Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
 
  "a tagbar
  Plug 'majutsushi/tagbar'
@@ -184,6 +185,8 @@ call plug#begin()
 
 
  Plug 'scrooloose/nerdtree'
+ Plug 'Xuyuanp/nerdtree-git-plugin'
+ Plug 'ryanoasis/vim-devicons'
 
  " deoplete and deps
  Plug 'Shougo/deoplete.nvim'
