@@ -1,3 +1,4 @@
+# vim: set ft=bash
 alias yum="sudo -E yum install"
 alias apt-get="sudo -E apt-get"
 alias grep="grep --exclude-dir=.svn"
@@ -15,4 +16,8 @@ if [ "$TERM" != "dumb" ]; then
     elif [[ $uname == "Darwin" ]]; then
         alias ls='ls -G'
     fi
+fi
+
+if [ -e ~/.aliases.local ]; then
+    source ~/.aliases.local
 fi
