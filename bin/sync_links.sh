@@ -133,12 +133,16 @@ function is_vcs_location {
 for repo in ${VCS_DIRS}; do
 	LOC=$(eval "echo \$$(echo VCS_LOCATION_${repo})")
 	DIR=$(eval "echo \$$(echo CHECKOUT_${repo})")
-    DEST=$(eval "echo \$$(echo DEST_${repo})") || $HOME
+    DEST=$(eval "echo \$$(echo DEST_${repo})")
 
 	echo "syncing repository ${repo} from ${LOC}  to ${DIR}"
 	dir_update ${DIR} ${LOC}
 
 	shopt -s dotglob
+
+	if [[ -z $DEST ]]; then
+		continue
+	fi
 
     if [[ ! -d $DEST ]]; then 
         mkdir $DEST

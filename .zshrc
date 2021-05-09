@@ -131,14 +131,6 @@ SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
   yellow 'viz-staging'
 )
 
-PATH="/Users/gordon.irving/perl5/bin${PATH:+:${PATH}}"; export PATH;
-PERL5LIB="/Users/gordon.irving/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
-PERL_LOCAL_LIB_ROOT="/Users/gordon.irving/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
-PERL_MB_OPT="--install_base \"/Users/gordon.irving/perl5\""; export PERL_MB_OPT;
-PERL_MM_OPT="INSTALL_BASE=/Users/gordon.irving/perl5"; export PERL_MM_OPT;
-
-
-
 # Shows selected AWS-cli profile.
 spaceship_aws() {
   SPACESHIP_AWS_PROFILE="${AWS_PROFILE:-"$AWS_VAULT"}"
@@ -158,3 +150,4 @@ spaceship_aws() {
     "${SPACESHIP_AWS_SYMBOL} $SPACESHIP_AWS_PROFILE [$AWS_REGION]" \
     "$SPACESHIP_AWS_SUFFIX"
 }
+fpath+=${ZDOTDIR:-~}/.zsh_functions

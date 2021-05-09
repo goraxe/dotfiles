@@ -18,7 +18,10 @@ VCS_LOCATION_CONFIG="https://github.com:goraxe/configfiles.git"
 CHECKOUT_CONFIG="${HOME}/configfiles"
 DEST_CONFIG="${HOME}/.config"
 
-VCS_DIRS="HOME CONFIG"
+VCS_LOCATION_TPM="https://github.com/tmux-plugins/tpm"
+CHECKOUT_TPM="${HOME}/.tmux/plugins/tpm"
+
+VCS_DIRS="HOME CONFIG TPM"
 
 if [[ -e "$HOME/.dotfiles.local" ]]; then
     source "$HOME/.dotfiles.local"
