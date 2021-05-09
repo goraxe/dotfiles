@@ -31,7 +31,16 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 DISABLE_AUTO_TITLE=true
 
-source ~/.zplug/init.zsh
+if [[ -e /usr/local/opt/zplug ]]; then
+    export ZPLUG_HOME=/usr/local/opt/zplug
+    source $ZPLUG_HOME/init.zsh
+elif [[ -e /usr/share/zplug ]]; then
+    source /usr/share/zplug/init.zsh
+else
+    export ZPLUG_HOME=$HOME
+    source $ZPLUG_HOME/init.zsh
+fi
+# source ~/.zplug/init.zsh
 
 
 
@@ -70,6 +79,9 @@ zplug "plugins/helm", from:oh-my-zsh
 zplug "plugins/kubectl", from:oh-my-zsh
 zplug "plugins/emoji", from:oh-my-zsh
 
+zplug "reegnz/aws-vault-zsh-plugin"
+zplug "blimmer/zsh-aws-vault"
+
 # TODO
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-extras
@@ -105,3 +117,44 @@ SPACESHIP_TIME_SHOW=true
 SPACESHIP_HOST_SHOW=true
 SPACESHIP_EXIT_CODE_SHOW=true
 zplug load --verbose
+
+SPACESHIP_KUBECTL_SHOW=true
+SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
+  # red if namespace is "kube-system"
+  red    '\(kube-system)$'
+  red   'viz-production'
+  # else, 
+  green 'default'
+  green 'viz-x'
+  green 'viz-wreckit'
+  # else, yellow if the entire content is "test-" followed by digits, and no namespace is displayed
+  yellow 'viz-staging'
+)
+
+PATH="/Users/gordon.irving/perl5/bin${PATH:+:${PATH}}"; export PATH;
+PERL5LIB="/Users/gordon.irving/perl5/lib/perl5${PERL5LIB:+:${PERL5LIB}}"; export PERL5LIB;
+PERL_LOCAL_LIB_ROOT="/Users/gordon.irving/perl5${PERL_LOCAL_LIB_ROOT:+:${PERL_LOCAL_LIB_ROOT}}"; export PERL_LOCAL_LIB_ROOT;
+PERL_MB_OPT="--install_base \"/Users/gordon.irving/perl5\""; export PERL_MB_OPT;
+PERL_MM_OPT="INSTALL_BASE=/Users/gordon.irving/perl5"; export PERL_MM_OPT;
+
+
+
+# Shows selected AWS-cli profile.
+spaceship_aws() {
+  SPACESHIP_AWS_PROFILE="${AWS_PROFILE:-"$AWS_VAULT"}"
+
+  [[ $SPACESHIP_AWS_SHOW == false ]] && return
+
+  # Check if the AWS-cli is installed
+  spaceship::exists aws || return
+
+  # Is the current profile not the default profile
+  [[ -z $SPACESHIP_AWS_PROFILE ]] || [[ "$SPACESHIP_AWS_PROFILE" == "default" ]] && return
+
+  # Show prompt section
+  spaceship::section \
+    "$SPACESHIP_AWS_COLOR" \
+    "$SPACESHIP_AWS_PREFIX" \
+    "${SPACESHIP_AWS_SYMBOL} $SPACESHIP_AWS_PROFILE [$AWS_REGION]" \
+    "$SPACESHIP_AWS_SUFFIX"
+}
