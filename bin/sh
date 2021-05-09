@@ -2,7 +2,7 @@
 echo args $@ >> ~/log/sh.log
 #export >> ~/log/sh.log
 
-if which /bin/zsh; then
+if which /bin/zsh > /dev/null ; then
     export SHELL=/bin/zsh
     exec /bin/zsh "$@"
 else
