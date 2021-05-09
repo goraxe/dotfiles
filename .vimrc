@@ -33,6 +33,9 @@ set expandtab
 "highlight Folded guibg=grey50 guifg=blue
 "highlight FoldColumn guibg=grey30 guifg=darkblue
 
+" wildmenu
+set wildmode=longest,list,full
+set wildmenu
 
 set foldcolumn=2
 set foldmethod=syntax
@@ -131,6 +134,7 @@ call plug#begin()
   Plug 'ruanyl/coverage.vim'
   Plug 'bkad/CamelCaseMotion'
   Plug 'jiangmiao/auto-pairs'
+  Plug 'gyim/vim-boxdraw'
 
   Plug 'tpope/vim-commentary'
 
