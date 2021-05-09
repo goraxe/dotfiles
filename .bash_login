@@ -13,3 +13,4 @@ fi
 
 source .login
 
+. "$HOME/.cargo/env"

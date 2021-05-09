@@ -151,3 +151,7 @@ spaceship_aws() {
     "$SPACESHIP_AWS_SUFFIX"
 }
 fpath+=${ZDOTDIR:-~}/.zsh_functions
+# >>>> Vagrant command completion (start)
+fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
+compinit
+# <<<<  Vagrant command completion (end)
