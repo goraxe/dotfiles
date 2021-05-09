@@ -105,3 +105,5 @@ SPACESHIP_TIME_SHOW=true
 SPACESHIP_HOST_SHOW=true
 SPACESHIP_EXIT_CODE_SHOW=true
 zplug load --verbose
+
+fpath+=${ZDOTDIR:-~}/.zsh_functions
