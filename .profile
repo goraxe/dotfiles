@@ -25,6 +25,10 @@ if [[ -d ${HOME}/bin.local || -L ${HOME}/bin.local ]] ; then
     PATH="${HOME}/bin.local:${PATH}"
 fi
 
+if [[ -d ${HOME}/.local/bin|| -L ${HOME}/.local/bin ]] ; then
+    PATH="${HOME}/.local/bin:${PATH}"
+fi
+
 if [[ -d $HOME/go/bin || -L $HOME/go/bin ]] ; then
     PATH="${PATH}:${HOME}/go/bin"
 fi
@@ -124,3 +128,6 @@ export SDKMAN_DIR="/home/goraxe/.sdkman"
 # added by travis gem
 [ -f /home/goraxe/.travis/travis.sh ] && source /home/goraxe/.travis/travis.sh
 
+. "$HOME/.cargo/env"
+
+export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
