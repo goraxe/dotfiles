@@ -1,3 +1,15 @@
 {
-   "go.trace.server": 9
+   "angular.log": "verbose",
+   "languageserver": {
+     "yaml.schemas": {
+        "kubernetes": "/*.yaml",
+       "filetypes": ["yaml"]
+     },
+     "go": {
+       "command": "gopls",
+       "rootPatterns": ["go.mod"],
+       "trace.server": "verbose",
+       "filetypes": ["go"]
+     }
+   }
 }
