@@ -37,7 +37,7 @@ if [[ -e /usr/local/opt/zplug ]]; then
 elif [[ -e /usr/share/zplug ]]; then
     source /usr/share/zplug/init.zsh
 else
-    export ZPLUG_HOME=$HOME
+    export ZPLUG_HOME=$HOME/.zplug
     source $ZPLUG_HOME/init.zsh
 fi
 # source ~/.zplug/init.zsh
