@@ -82,6 +82,8 @@ zplug "plugins/emoji", from:oh-my-zsh
 zplug "reegnz/aws-vault-zsh-plugin"
 zplug "blimmer/zsh-aws-vault"
 
+zplug "g-plane/zsh-yarn-autocompletions", hook-build:"./zplug.zsh", defer:2
+
 # TODO
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-extras
