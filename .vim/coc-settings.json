@@ -9,21 +9,11 @@
       ],
       "initializationOptions": {},
       "settings": {}
-    },
-    "golang": {
-      "command": "gopls",
-      "rootPatterns": ["go.mod"],
-      "filetypes": ["go"]
-    },
-     "go": {
-       "command": "gopls",
-       "rootPatterns": ["go.mod"],
-       "trace.server": "verbose",
-       "filetypes": ["go"]
-     }
+    }
   },
   "yaml.schemas": {
     "kubernetes": "*.yaml"
   },
-  "go.trace.server": "messages"
+  "go.trace.server": "messages",
+  "angular.log": "verbose"
 }

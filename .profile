@@ -58,8 +58,8 @@ if [[ -d $HOME/.yarn/bin || -L $HOME/.yarn/bin ]] ; then
     PATH="${PATH}:${HOME}/.yarn/bin"
 fi
 
-if [[ -d $HOME/.gem/ruby/2.3.0/bin ]]; then
-    PATH=${PATH}:$HOME/.gem/ruby/2.3.0/bin
+if [[ -d $HOME/.gem/ruby/2.5.0/bin ]]; then
+    PATH=${PATH}:$HOME/.gem/ruby/2.5.0/bin
 fi
 
 if [[ -d $HOME/neo4j/bin || -L $HOME/neo4j/bin ]] ; then
@@ -136,4 +136,4 @@ export SDKMAN_DIR="/home/goraxe/.sdkman"
 
 . "$HOME/.cargo/env"
 
-export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
+#export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
