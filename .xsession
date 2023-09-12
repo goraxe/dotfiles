@@ -2,12 +2,15 @@
 
 echo "xsession is started" >> ~/log/xsession
 
-export >> ~/log/xsession
 
 if [[ -e .xsession.local ]]; then
- source .xsession.local
+ . .xsession.local
 fi
 
-xscreensaver &
-awesome
+. ~/.profile
+
+export >> ~/log/xsession
+
+xscreensaver --no-splash &
+# awesome
 #exec ck-launch-session gnome-session

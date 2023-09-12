@@ -136,6 +136,13 @@ call plug#begin()
   Plug 'jiangmiao/auto-pairs'
   Plug 'gyim/vim-boxdraw'
 
+
+  " Plug 'google/vim-maktaba'
+  " Plug 'google/vim-coverage'
+
+  " Plug 'google/vim-glaive'
+  " call glaive#Install()
+
   Plug 'tpope/vim-commentary'
 
   " general text object plugins
@@ -171,7 +178,7 @@ call plug#begin()
  Plug 'artur-shaik/vim-javacomplete2'
 
  "go plugin
- "Plug 'fatih/vim-go'
+ Plug 'fatih/vim-go'
  Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh'  }
  Plug 'zchee/deoplete-go', { 'do': 'make' }
  Plug 'Shougo/vimshell.vim'
@@ -210,7 +217,7 @@ call plug#begin()
  Plug 'jvanja/vim-bootstrap4-snippets'
 
  " colorscheme
- Plug 'nightsense/vimspectr'
+" Plug 'nightsense/vimspectr'
  Plug 'jacoborus/tender.vim'
  Plug 'lifepillar/vim-solarized8'
 

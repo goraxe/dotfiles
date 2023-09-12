@@ -7,6 +7,12 @@ alias g-cpan="sudo g-cpan"
 alias pacman="sudo pacman"
 alias systemctl="sudo systemctl"
 
+which nvim > /dev/null
+if [[ $? == 0 ]]; then
+alias vim=nvim
+fi
+
+
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
     uname=$(uname)

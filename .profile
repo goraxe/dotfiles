@@ -134,6 +134,9 @@ export SDKMAN_DIR="/home/goraxe/.sdkman"
 # added by travis gem
 [ -f /home/goraxe/.travis/travis.sh ] && source /home/goraxe/.travis/travis.sh
 
-. "$HOME/.cargo/env"
+
+[ -f "$HOME/.asdf/asdf.sh" ] && source "$HOME/.asdf/asdf.sh"
+
+[ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
 
 #export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g

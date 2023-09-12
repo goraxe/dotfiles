@@ -60,7 +60,7 @@ if [[ -e /etc/zsh_command_not_found ]]; then
 fi
 
 zplug "zplug/zplug"
-zplug "~/.zsh", from:local
+# zplug "~/.zsh", from:local
 
 zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
@@ -99,15 +99,10 @@ zplug "plugins/ng", from:oh-my-zsh
 zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
 
-. "$HOME/.asdf/asdf.sh"
-fpath=(${ASDF_DIR}/completions $fpath)
-
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-#[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/goraxe/.sdkman"
-[[ -e "/home/goraxe/.sdkman/bin/sdkman-init.sh" ]] && source "/home/goraxe/.sdkman/bin/sdkman-init.sh"
+if [[ -e "$HOME/.asdf/asdf.sh" ]]; then
+  . "$HOME/.asdf/asdf.sh"
+  fpath=(${ASDF_DIR}/completions $fpath)
+fi 
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
@@ -157,7 +152,8 @@ spaceship_aws() {
 }
 fpath+=${ZDOTDIR:-~}/.zsh_functions
 # >>>> Vagrant command completion (start)
-fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
+
+[ -f /opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh ] && fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
 compinit
 # <<<<  Vagrant command completion (end)
 #
