@@ -19,8 +19,6 @@ zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p
 zstyle ':completion:*' squeeze-slashes true
 zstyle :compinstall filename '/home/goraxe/.zshrc'
 
-autoload -Uz compinit
-compinit
 # End of lines added by compinstall
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
@@ -100,8 +98,12 @@ zplug "plugins/ng", from:oh-my-zsh
 #zplug "themes/johnathan", from:oh-my-zsh
 zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
+
+. "$HOME/.asdf/asdf.sh"
+fpath=(${ASDF_DIR}/completions $fpath)
+
 #THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"
+#[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/goraxe/.sdkman"
@@ -115,10 +117,11 @@ if ! zplug check --verbose; then
     fi
 fi
 
+zplug load
+
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_HOST_SHOW=true
 SPACESHIP_EXIT_CODE_SHOW=true
-zplug load --verbose
 
 SPACESHIP_KUBECTL_SHOW=true
 SPACESHIP_KUBECONTEXT_COLOR_GROUPS=(
@@ -157,3 +160,6 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
 compinit
 # <<<<  Vagrant command completion (end)
+#
+autoload -Uz compinit
+compinit
