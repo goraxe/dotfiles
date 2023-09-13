@@ -56,7 +56,7 @@ zplug "zsh-users/zsh-autosuggestions"
 zplug "zsh-users/zsh-syntax-highlighting", defer:2
 
 zplug "plugins/git",   from:oh-my-zsh
-zplug "plugins/gradle",   from:oh-my-zsh
+# zplug "plugins/gradle",   from:oh-my-zsh
 zplug "plugins/zsh_reload",   from:oh-my-zsh
 zplug "plugins/per-directory-history", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
