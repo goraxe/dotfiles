@@ -47,17 +47,7 @@ fi
 #    source $file
 #done
 
-if [[ -e  $HOME/.aliases ]]; then
-    source $HOME/.aliases
-fi
 
-if [[ -e  $HOME/.profile ]]; then
-    source $HOME/.profile
-fi
-
-if [[ -e /etc/zsh_command_not_found ]]; then
-   source /etc/zsh_command_not_found
-fi
 
 zplug "zplug/zplug"
 # zplug "~/.zsh", from:local
@@ -154,8 +144,24 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 # >>>> Vagrant command completion (start)
 
 [ -f /opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh ] && fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
-compinit
+#
 # <<<<  Vagrant command completion (end)
+
+fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
+
+
+if [[ -e  $HOME/.profile ]]; then
+    source $HOME/.profile
+fi
+
+if [[ -e  $HOME/.aliases ]]; then
+    source $HOME/.aliases
+fi
+
+if [[ -e /etc/zsh_command_not_found ]]; then
+   source /etc/zsh_command_not_found
+fi
+
 #
 autoload -Uz compinit
 compinit

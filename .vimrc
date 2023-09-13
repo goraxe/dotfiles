@@ -187,7 +187,7 @@ call plug#begin()
 
  " coc
  Plug 'neoclide/coc.nvim', { 'branch': 'release'  }
- Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
+" Plug 'josa42/coc-go', {'do': 'yarn install --frozen-lockfile'}
 
  "a tagbar
  Plug 'majutsushi/tagbar'
@@ -204,7 +204,7 @@ call plug#begin()
  Plug 'roxma/nvim-yarp'
  Plug 'roxma/vim-hug-neovim-rpc'
 
- Plug 'weynhamz/vim-plugin-minibufexpl'
+ Plug 'fholgado/minibufexpl.vim'
 
  Plug 'airblade/vim-gitgutter'
  Plug 'xolox/vim-misc'

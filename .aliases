@@ -1,11 +1,15 @@
-# vim: set ft=bash
+# vim: ft=bash
 alias yum="sudo -E yum install"
 alias apt-get="sudo -E apt-get"
 alias grep="grep --exclude-dir=.svn"
 alias emerge="sudo -E emerge"
 alias g-cpan="sudo g-cpan"
 alias pacman="sudo pacman"
-alias systemctl="sudo systemctl"
+
+
+if command -v nvim &> /dev/null; then
+    alias vim="nvim"
+fi
 
 which nvim > /dev/null
 if [[ $? == 0 ]]; then
@@ -15,12 +19,16 @@ fi
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
-    uname=$(uname)
-    if [[ $uname == "Linux" ]]; then
-        eval "`dircolors -b`"
-        alias ls='ls --color=auto'
-    elif [[ $uname == "Darwin" ]]; then
-        alias ls='ls -G'
+    if command -v lsd &> /dev/null; then
+        alias ls="lsd"
+    else 
+      uname=$(uname)
+      if [[ $uname == "Linux" ]]; then
+          eval "`dircolors -b`"
+          alias ls='ls --color=auto'
+      elif [[ $uname == "Darwin" ]]; then
+          alias ls='ls -G'
+      fi
     fi
 fi
 

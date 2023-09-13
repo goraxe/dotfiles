@@ -84,11 +84,11 @@ fi
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 
 
-# >>>> Vagrant command completion (start)
 if [[ -e /opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/bash/completion.sh ]]; then
     . /opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/bash/completion.sh
 fi
 # <<<<  Vagrant command completion (end)
+[[ -e "$HOME/.cargo/env" ]] && . "$HOME/.cargo/env"
 
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/goraxe/.sdkman"

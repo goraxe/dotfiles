@@ -11,6 +11,7 @@ fi
 
 export >> ~/log/xsession
 
-xscreensaver --no-splash &
+picom --config ~/.picom.conf &
+# xscreensaver &
 # awesome
 #exec ck-launch-session gnome-session
