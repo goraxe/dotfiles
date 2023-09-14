@@ -62,7 +62,7 @@ zplug "plugins/per-directory-history", from:oh-my-zsh
 zplug "plugins/tmux", from:oh-my-zsh
 zplug "plugins/docker-compose", from:oh-my-zsh
 zplug "plugins/dotenv", from:oh-my-zsh # interesting alternatives https://github.com/direnv/direnv & https://github.com/Tarrasch/zsh-autoenv
-zplug "plugins/golang", from:oh-my-zsh
+# zplug "plugins/golang", from:oh-my-zsh
 zplug "plugins/helm", from:oh-my-zsh
 zplug "plugins/kubectl", from:oh-my-zsh
 zplug "plugins/emoji", from:oh-my-zsh
@@ -70,23 +70,23 @@ zplug "plugins/emoji", from:oh-my-zsh
 zplug "reegnz/aws-vault-zsh-plugin"
 zplug "blimmer/zsh-aws-vault"
 
-zplug "g-plane/zsh-yarn-autocompletions", hook-build:"./zplug.zsh", defer:2
+#zplug "g-plane/zsh-yarn-autocompletions", hook-build:"./zplug.zsh", defer:2
 
 # TODO
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
 # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-extras
 
-zplug "stedolan/jq", \
-    from:gh-r, \
-    as:command, \
-    rename-to:jq
-zplug "b4b4r07/emoji-cli", \
-    on:"stedolan/jq"
+# zplug "stedolan/jq", \
+#     from:gh-r, \
+#     as:command, \
+#     rename-to:jq
+# zplug "b4b4r07/emoji-cli", \
+#     on:"stedolan/jq"
 
 zplug "plugins/ng", from:oh-my-zsh
 
 #zplug "themes/johnathan", from:oh-my-zsh
-zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+#zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
 
 if [[ -e "$HOME/.asdf/asdf.sh" ]]; then
@@ -100,6 +100,18 @@ if ! zplug check --verbose; then
     if read -q; then
         echo; zplug install
     fi
+fi
+
+if [[ -e  $HOME/.profile ]]; then
+    source $HOME/.profile
+fi
+
+if [[ -e  $HOME/.aliases ]]; then
+    source $HOME/.aliases
+fi
+
+if [[ -e /etc/zsh_command_not_found ]]; then
+   source /etc/zsh_command_not_found
 fi
 
 zplug load
@@ -150,18 +162,10 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
 
 
-if [[ -e  $HOME/.profile ]]; then
-    source $HOME/.profile
-fi
-
-if [[ -e  $HOME/.aliases ]]; then
-    source $HOME/.aliases
-fi
-
-if [[ -e /etc/zsh_command_not_found ]]; then
-   source /etc/zsh_command_not_found
-fi
 
 #
 autoload -Uz compinit
 compinit
+
+
+eval $(starship init zsh)

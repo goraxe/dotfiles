@@ -102,41 +102,17 @@ export ANDROID_HOME PATH PKG_CONFIG_PATH LD_LIBRARY_PATH
 
 eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"
-
-if [[ -e "$HOME/.rvm/bin" ]]; then
-    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-fi
-
 if [[ -e "$HOME/.krew/bin" ]]; then
     export PATH="$PATH:$HOME/.krew/bin"
 fi
-
-#[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*
-#if [[ -r $HOME/.rvm/bin ]]; then
-#    export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-#fi
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && . "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-#THIS MUST BE AT THE END OF THE FILE FOR GVM TO WORK!!!
-[[ -s "/home/gordon/.gvm/bin/gvm-init.sh" ]] && source "/home/gordon/.gvm/bin/gvm-init.sh"
-
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/home/goraxe/.sdkman"
-[[ -s "/home/goraxe/.sdkman/bin/sdkman-init.sh" ]] && source "/home/goraxe/.sdkman/bin/sdkman-init.sh"
-
-[[ -s "/home/goraxe/.gvm/scripts/gvm" ]] && source "/home/goraxe/.gvm/scripts/gvm"
-
 # added by travis gem
 [ -f /home/goraxe/.travis/travis.sh ] && source /home/goraxe/.travis/travis.sh
-
 
 [ -f "$HOME/.asdf/asdf.sh" ] && source "$HOME/.asdf/asdf.sh"
 
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
-
-#export GOPATH="$HOME/go"; export GOROOT="$HOME/.go"; export PATH="$GOPATH/bin:$PATH"; # g-install: do NOT edit, see https://github.com/stefanmaric/g
