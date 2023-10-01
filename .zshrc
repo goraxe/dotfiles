@@ -71,6 +71,8 @@ zplug "plugins/emoji", from:oh-my-zsh
 zplug "reegnz/aws-vault-zsh-plugin"
 zplug "blimmer/zsh-aws-vault"
 
+# python related
+zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
 #zplug "g-plane/zsh-yarn-autocompletions", hook-build:"./zplug.zsh", defer:2
 
 # TODO
