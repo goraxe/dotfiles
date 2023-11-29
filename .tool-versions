@@ -1,6 +1,6 @@
 neovim 0.9.2
 golang 1.21.4
-awscli 2.13.25
+awscli 2.14.2
 argocd 2.9.2
 starship 1.16.0
 bun 1.0.14
