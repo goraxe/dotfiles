@@ -7,3 +7,9 @@ bun 1.0.1
 loki-logcli 2.9.0
 kube-linter v0.6.4
 kubectl 1.28.2
+cargo-make 0.37.2
+lua 5.3.6
+pnpm 8.10.0-0
+nodejs 20.9.0
+tree-sitter 0.20.8
+fd 8.7.1
