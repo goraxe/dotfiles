@@ -8,7 +8,7 @@ loki-logcli 2.9.0
 kube-linter v0.6.4
 kubectl 1.28.4
 cargo-make 0.37.4
-lua 5.3.6
+lua 5.4.6
 pnpm 8.12.0
 nodejs 20.9.0
 tree-sitter 0.20.8
