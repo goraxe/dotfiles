@@ -3,7 +3,7 @@ golang 1.21.5
 awscli 2.14.4
 argocd 2.9.3
 starship 1.16.0
-bun 1.0.14
+bun 1.0.17
 loki-logcli 2.9.0
 kube-linter v0.6.4
 kubectl 1.28.4
