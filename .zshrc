@@ -164,9 +164,8 @@ fpath+=${ZDOTDIR:-~}/.zsh_functions
 
 fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
 
-
-
 #
+autoload -Uz ghc
 autoload -Uz compinit
 compinit
 

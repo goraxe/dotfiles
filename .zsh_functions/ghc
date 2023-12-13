@@ -1,0 +1,19 @@
+# ft:zsh
+
+  local arg="$1"
+  local parts=(${(@s:/:)arg})
+  echo "$"
+  if [[ "x" = "x$arg" || "2" !=  "${#parts[@]}" ]]; then 
+    echo "I need a github repo ie ghc: <org/repo>"
+    return
+  fi
+  cd ~/projects/github.com
+  if [ ! -d "$parts[1]" ]; then
+    mkdir "$parts[1]"
+  fi
+  cd "$parts[1]"
+  if [ ! -d "$parts[2]" ]; then
+    gh repo clone $arg
+  fi
+  cd "$parts[2]"
+
