@@ -9,3 +9,5 @@
 .vim/contrib
 .vim/bundle
 .vim/plugged
+*.bck
+zcompdump.*
