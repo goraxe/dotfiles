@@ -96,7 +96,11 @@ if [[ -e "$HOME/.tfenv/bin" ]]; then
     PATH="$PATH:$HOME/.tfenv/bin"
 fi
 
-export EDITOR=vim
+if command -v nvim &> /dev/null; then
+    export EDITOR=nvim
+else
+    export EDITOR=vim
+fi
 
 export ANDROID_HOME PATH PKG_CONFIG_PATH LD_LIBRARY_PATH
 
