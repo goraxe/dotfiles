@@ -1,4 +1,4 @@
-neovim 0.9.5
+neovim 0.10.0
 golang 1.21.6
 awscli 2.15.17
 argocd 2.9.6
