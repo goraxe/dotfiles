@@ -6,10 +6,10 @@ kubectl 1.29.1
 krew 0.4.4
 vault 1.15.5
 kind 0.21.0
-pulumi 3.104.2
+pulumi 3.117.0
 starship 1.16.0
 bun 1.0.26
-loki-logcli 2.9.0
+loki-logcli 3.0.0
 kube-linter v0.6.4
 kubectl 1.29.1
 cargo-make 0.37.9
@@ -29,3 +29,5 @@ jsonnet 0.20.0
 kind 0.22.0
 helm-ct 3.10.1
 github-cli 2.43.1
+promtool 2.52.0
+jb 0.5.1
