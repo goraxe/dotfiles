@@ -110,6 +110,9 @@ if [[ -e "$HOME/.krew/bin" ]]; then
     export PATH="$PATH:$HOME/.krew/bin"
 fi
 
+# make ls colors a little less garish
+export LS_COLORS="ow=41,37"
+
 # added by travis gem
 [ -f /home/goraxe/.travis/travis.sh ] && source /home/goraxe/.travis/travis.sh
 
