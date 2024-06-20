@@ -14,7 +14,7 @@ kube-linter v0.6.4
 kubectl 1.29.1
 cargo-make 0.37.9
 lua 5.4.6
-pnpm 8.15.1
+pnpm 9.4.0
 nodejs 20.11.0
 tree-sitter 0.20.8
 fd 8.7.1
