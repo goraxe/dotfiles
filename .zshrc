@@ -167,7 +167,16 @@ fpath=(/opt/vagrant/embedded/gems/2.2.16/gems/vagrant-2.2.16/contrib/zsh $fpath)
 #
 autoload -Uz ghc
 autoload -Uz compinit
+autoload -Uz _cosign
 compinit
 
 
 eval $(starship init zsh)
+
+# pnpm
+export PNPM_HOME="/home/goraxe/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end

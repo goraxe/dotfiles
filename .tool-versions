@@ -31,3 +31,6 @@ helm-ct 3.10.1
 github-cli 2.43.1
 promtool 2.52.0
 jb 0.5.1
+argo 3.5.2
+conftest 0.47.0
+cosign 2.2.2
