@@ -1,7 +1,7 @@
 neovim 0.10.0
 golang 1.21.6
 awscli 2.15.17
-argocd 2.9.6
+argocd 3.1.8
 kubectl 1.29.1
 krew 0.4.4
 vault 1.15.5
@@ -14,8 +14,8 @@ kube-linter v0.6.4
 kubectl 1.29.1
 cargo-make 0.37.9
 lua 5.4.6
-pnpm 8.15.1
-nodejs 20.11.0
+pnpm 10.18.3
+nodejs 22.20.0
 tree-sitter 0.20.8
 fd 8.7.1
 yarn 1.22.19
@@ -33,4 +33,4 @@ promtool 2.52.0
 jb 0.5.1
 argo 3.5.2
 conftest 0.47.0
-cosign 2.2.2
+cosign 3.0.2
