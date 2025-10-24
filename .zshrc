@@ -92,10 +92,6 @@ zplug "plugins/ng", from:oh-my-zsh
 #zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
 
-if [[ -e "$HOME/.asdf/asdf.sh" ]]; then
-  . "$HOME/.asdf/asdf.sh"
-  fpath=(${ASDF_DIR}/completions $fpath)
-fi 
 
 # Install plugins if there are plugins that have not been installed
 if ! zplug check --verbose; then
