@@ -2,8 +2,8 @@
 CHECKOUT_HOME="${HOME}/dotfiles"
 #
 
-VCS_UPDATE_CMD="git pull"
-VCS_CREATE_CMD="git clone"
+VCS_UPDATE_CMD="git pull --recurse-submodules"
+VCS_CREATE_CMD="git clone --recurse-submodules"
 VCS_COMMIT_CMD="git commit -a"
 VCS_LOCATION_CMD='git remote show origin'
 VCS_LOCATION_CMD_GREP='grep URL'
