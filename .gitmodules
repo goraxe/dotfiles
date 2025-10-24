@@ -1,3 +1,6 @@
 [submodule ".asdf"]
 	path = .asdf
 	url = https://github.com/asdf-vm/asdf.git
+[submodule ".zgenom"]
+	path = .zgenom
+	url = https://github.com/jandamm/zgenom.git
