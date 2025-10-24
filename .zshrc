@@ -4,6 +4,8 @@ if [[ -e /usr/local/share/zsh/functions ]]; then
     export FPATH=$FPATH:/usr/local/share/zsh/functions
 fi
 
+ZSH_CACHE_DIR="${XDG_CACHE_HOME:-$HOME/.cache}/ohmyzsh"
+
 zstyle ':completion:*' completer _list _oldlist _expand _complete _ignored _correct _approximate
 zstyle ':completion:*' file-sort name
 zstyle ':completion:*' format '---> %d:'
@@ -30,15 +32,54 @@ bindkey '^R' history-incremental-search-backward
 # End of lines configured by zsh-newuser-install
 DISABLE_AUTO_TITLE=true
 
-if [[ -e /usr/local/opt/zplug ]]; then
-    export ZPLUG_HOME=/usr/local/opt/zplug
-    source $ZPLUG_HOME/init.zsh
-elif [[ -e /usr/share/zplug ]]; then
-    source /usr/share/zplug/init.zsh
-else
-    export ZPLUG_HOME=$HOME/.zplug
-    source $ZPLUG_HOME/init.zsh
+# load zgenom
+source "${HOME}/.zgenom/zgenom.zsh"
+
+# Check for plugin and zgenom updates every 7 days
+# This does not increase the startup time.
+zgenom autoupdate
+
+# if the init script doesn't exist
+if ! zgenom saved; then
+    echo "Creating a zgenom save"
+
+    #source <$(helm completion zsh)
+    # Add this if you experience issues with missing completions or errors mentioning compdef.
+    zgenom compdef
+    # completions
+    zgenom load zsh-users/zsh-completions
+    zgenom load zsh-users/zsh-autosuggestions
+    zgenom load zsh-users/zsh-syntax-highlighting
+
+    zgenom ohmyzsh
+    zgenom ohmyzsh plugins/git
+    # zgenom ohmyzsh plugins/gradle
+    #zgenom ohmyzsh plugins/zsh_reload
+    zgenom ohmyzsh plugins/per-directory-history
+    zgenom ohmyzsh plugins/tmux
+    zgenom ohmyzsh plugins/docker-compose
+    zgenom ohmyzsh plugins/dotenv # interesting alternatives https://github.com/direnv/direnv & https://github.com/Tarrasch/zsh-autoenv
+    # zgenom ohmyzsh plugins/golang
+    zgenom ohmyzsh plugins/helm
+    zgenom ohmyzsh plugins/kubectl
+    zgenom ohmyzsh plugins/emoji
+    zgenom ohmyzsh plugins/ng
+
+
+    zgenom load MichaelAquilina/zsh-autoswitch-virtualenv
+
+    zgenom save
 fi
+
+# if [[ -e /usr/local/opt/zplug ]]; then
+#     export ZPLUG_HOME=/usr/local/opt/zplug
+#     source $ZPLUG_HOME/init.zsh
+# elif [[ -e /usr/share/zplug ]]; then
+#     source /usr/share/zplug/init.zsh
+# else
+#     export ZPLUG_HOME=$HOME/.zplug
+#     source $ZPLUG_HOME/init.zsh
+# fi
 # source ~/.zplug/init.zsh
 
 
@@ -50,56 +91,56 @@ fi
 
 
 
-zplug "zplug/zplug"
+#zplug "zplug/zplug"
 # zplug "~/.zsh", from:local
 
-zplug "zsh-users/zsh-autosuggestions"
-zplug "zsh-users/zsh-syntax-highlighting", defer:2
-
-zplug "plugins/git",   from:oh-my-zsh
-# zplug "plugins/gradle",   from:oh-my-zsh
-zplug "plugins/zsh_reload",   from:oh-my-zsh
-zplug "plugins/per-directory-history", from:oh-my-zsh
-zplug "plugins/tmux", from:oh-my-zsh
-zplug "plugins/docker-compose", from:oh-my-zsh
-zplug "plugins/dotenv", from:oh-my-zsh # interesting alternatives https://github.com/direnv/direnv & https://github.com/Tarrasch/zsh-autoenv
-# zplug "plugins/golang", from:oh-my-zsh
-zplug "plugins/helm", from:oh-my-zsh
-zplug "plugins/kubectl", from:oh-my-zsh
-zplug "plugins/emoji", from:oh-my-zsh
-
-zplug "reegnz/aws-vault-zsh-plugin"
-zplug "blimmer/zsh-aws-vault"
-
-# python related
-zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
-#zplug "g-plane/zsh-yarn-autocompletions", hook-build:"./zplug.zsh", defer:2
-
-# TODO
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
-# https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-extras
-
-# zplug "stedolan/jq", \
-#     from:gh-r, \
-#     as:command, \
-#     rename-to:jq
-# zplug "b4b4r07/emoji-cli", \
-#     on:"stedolan/jq"
-
-zplug "plugins/ng", from:oh-my-zsh
-
-#zplug "themes/johnathan", from:oh-my-zsh
-#zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
+# zplug "zsh-users/zsh-autosuggestions"
+# zplug "zsh-users/zsh-syntax-highlighting", defer:2
+#
+# zplug "plugins/git",   from:oh-my-zsh
+# # zplug "plugins/gradle",   from:oh-my-zsh
+# zplug "plugins/zsh_reload",   from:oh-my-zsh
+# zplug "plugins/per-directory-history", from:oh-my-zsh
+# zplug "plugins/tmux", from:oh-my-zsh
+# zplug "plugins/docker-compose", from:oh-my-zsh
+# zplug "plugins/dotenv", from:oh-my-zsh # interesting alternatives https://github.com/direnv/direnv & https://github.com/Tarrasch/zsh-autoenv
+# # zplug "plugins/golang", from:oh-my-zsh
+# zplug "plugins/helm", from:oh-my-zsh
+# zplug "plugins/kubectl", from:oh-my-zsh
+# zplug "plugins/emoji", from:oh-my-zsh
+#
+# zplug "reegnz/aws-vault-zsh-plugin"
+# zplug "blimmer/zsh-aws-vault"
+#
+# # python related
+# zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
+# #zplug "g-plane/zsh-yarn-autocompletions", hook-build:"./zplug.zsh", defer:2
+#
+# # TODO
+# # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-auto-fetch
+# # https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git-extras
+#
+# # zplug "stedolan/jq", \
+# #     from:gh-r, \
+# #     as:command, \
+# #     rename-to:jq
+# # zplug "b4b4r07/emoji-cli", \
+# #     on:"stedolan/jq"
+#
+# zplug "plugins/ng", from:oh-my-zsh
+#
+# #zplug "themes/johnathan", from:oh-my-zsh
+# #zplug denysdovhan/spaceship-prompt, use:spaceship.zsh, from:github, as:theme
 
 
 
 # Install plugins if there are plugins that have not been installed
-if ! zplug check --verbose; then
-    printf "Install? [y/N]: "
-    if read -q; then
-        echo; zplug install
-    fi
-fi
+# if ! zplug check --verbose; then
+#     printf "Install? [y/N]: "
+#     if read -q; then
+#         echo; zplug install
+#     fi
+# fi
 
 if [[ -e  $HOME/.profile ]]; then
     source $HOME/.profile
@@ -113,7 +154,7 @@ if [[ -e /etc/zsh_command_not_found ]]; then
    source /etc/zsh_command_not_found
 fi
 
-zplug load
+#zplug load
 
 SPACESHIP_TIME_SHOW=true
 SPACESHIP_HOST_SHOW=true
