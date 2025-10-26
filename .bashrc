@@ -93,3 +93,5 @@ fi
 #THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
 export SDKMAN_DIR="/home/goraxe/.sdkman"
 [[ -s "/home/goraxe/.sdkman/bin/sdkman-init.sh" ]] && source "/home/goraxe/.sdkman/bin/sdkman-init.sh"
+
+complete -C /home/goraxe/dotfiles/.asdf/installs/tanka/0.28.2/bin/tk tk

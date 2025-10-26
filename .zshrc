@@ -217,3 +217,6 @@ case ":$PATH:" in
   *) export PATH="$PNPM_HOME:$PATH" ;;
 esac
 # pnpm end
+
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /home/goraxe/dotfiles/.asdf/installs/tanka/0.28.2/bin/tk tk
