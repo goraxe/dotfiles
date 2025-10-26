@@ -116,6 +116,6 @@ export LS_COLORS="ow=41,37"
 # added by travis gem
 [ -f /home/goraxe/.travis/travis.sh ] && source /home/goraxe/.travis/travis.sh
 
-[ -f "$HOME/.asdf/asdf.sh" ] && source "$HOME/.asdf/asdf.sh"
-
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
