@@ -1,4 +1,4 @@
-FROM ubuntu:xenial
+FROM ubuntu:noble
 
 RUN apt update && apt-get install -y software-properties-common && \
     add-apt-repository -y ppa:jonathonf/vim && \
