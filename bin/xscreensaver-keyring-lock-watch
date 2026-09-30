@@ -1,0 +1,95 @@
+#!/bin/sh
+set -eu
+
+log() {
+  printf '%s\n' "$*" >&2
+}
+
+get_locked_state() {
+  if ! command -v gdbus >/dev/null 2>&1; then
+    printf 'unknown'
+    return 0
+  fi
+
+  output=$(
+    gdbus call --session \
+      --dest org.freedesktop.secrets \
+      --object-path /org/freedesktop/secrets/collection/login \
+      --method org.freedesktop.DBus.Properties.Get \
+      org.freedesktop.Secret.Collection Locked \
+      2>/dev/null || true
+  )
+
+  case "$output" in
+    '(<true>,)') printf 'true' ;;
+    '(<false>,)') printf 'false' ;;
+    *) printf 'unknown' ;;
+  esac
+}
+
+log_locked_state() {
+  context=$1
+  log "$context: login keyring Locked=$(get_locked_state)"
+}
+
+wait_for_locked_state() {
+  expected=$1
+  context=$2
+  attempts=${3:-10}
+  delay=${4:-1}
+
+  i=1
+  while [ "$i" -le "$attempts" ]; do
+    state=$(get_locked_state)
+    if [ "$state" = "$expected" ]; then
+      log "$context: login keyring Locked=$state"
+      return 0
+    fi
+    sleep "$delay"
+    i=$((i + 1))
+  done
+
+  log "$context: login keyring Locked=$(get_locked_state) (expected $expected)"
+  return 1
+}
+
+lock_login_keyring() {
+  dbus-send --session \
+    --dest=org.freedesktop.secrets \
+    --type=method_call \
+    /org/freedesktop/secrets \
+    org.freedesktop.Secret.Service.Lock \
+    array:objpath:/org/freedesktop/secrets/collection/login \
+    >/dev/null 2>&1 || true
+}
+
+log "xscreensaver keyring watcher starting"
+log_locked_state "startup"
+
+while :; do
+  if ! command -v xscreensaver-command >/dev/null 2>&1; then
+    log "xscreensaver-command not found; retrying in 10s"
+    sleep 10
+    continue
+  fi
+
+  xscreensaver-command -watch 2>/dev/null | while read -r event rest; do
+    case "$event" in
+      LOCK)
+        log "xscreensaver LOCK event received; requesting login keyring lock"
+        lock_login_keyring
+        wait_for_locked_state true "after LOCK" || true
+        ;;
+      UNBLANK)
+        log "xscreensaver UNBLANK event received; checking login keyring unlock state"
+        wait_for_locked_state false "after UNBLANK" || true
+        ;;
+      BLANK)
+        log "xscreensaver BLANK event received"
+        ;;
+    esac
+  done
+
+  log "xscreensaver watch stream ended; retrying in 3s"
+  sleep 3
+done

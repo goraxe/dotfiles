@@ -1,0 +1,7 @@
+#!/bin/bash
+
+for plugin in $(cat $HOME/.tool-versions | awk -e '{ print $1}'); do
+    asdf plugin add $plugin
+done
+
+asdf install
