@@ -16,7 +16,7 @@ cargo-make 0.37.9
 lua 5.4.6
 pnpm 8.15.1
 nodejs 20.11.0
-tree-sitter 0.20.8
+tree-sitter 0.27.0
 fd 8.7.1
 yarn 1.22.19
 helm 3.13.3
