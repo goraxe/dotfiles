@@ -7,4 +7,6 @@ TRAPINT() {
     return 0;
 }
 
-source .login
+if [[ -e .login ]]; then
+    source .login
+fi
