@@ -2,8 +2,27 @@
 
 echo "xsessionrc is started" >> ~/log/xsession
 
-
 . ~/.profile
+
+# Give portal/app desktop detection something sane under Awesome.
+export XDG_CURRENT_DESKTOP="awesome:GNOME"
+export DESKTOP_SESSION="awesome"
+
+# Keep D-Bus/systemd user activation environments in sync for portal services.
+if command -v dbus-update-activation-environment >/dev/null 2>&1; then
+  dbus-update-activation-environment --systemd \
+    DISPLAY \
+    XDG_SESSION_TYPE \
+    XDG_CURRENT_DESKTOP \
+    DESKTOP_SESSION
+fi
+if command -v systemctl >/dev/null 2>&1; then
+  systemctl --user import-environment \
+    DISPLAY \
+    XDG_SESSION_TYPE \
+    XDG_CURRENT_DESKTOP \
+    DESKTOP_SESSION
+fi
 
 if [ "x$XDG_SESSION_TYPE" = "xwayland" ]; then 
   export MOZ_ENABLE_WAYLAND=1

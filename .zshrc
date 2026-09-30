@@ -219,3 +219,5 @@ esac
 # pnpm end
 
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init zsh)"; fi
+autoload -U +X bashcompinit && bashcompinit
+complete -o nospace -C /home/goraxe/dotfiles/.asdf/installs/tanka/0.28.2/bin/tk tk

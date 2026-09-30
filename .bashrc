@@ -94,4 +94,8 @@ fi
 export SDKMAN_DIR="/home/goraxe/.sdkman"
 [[ -s "/home/goraxe/.sdkman/bin/sdkman-init.sh" ]] && source "/home/goraxe/.sdkman/bin/sdkman-init.sh"
 
+<<<<<<< HEAD
 if command -v wt >/dev/null 2>&1; then eval "$(command wt config shell init bash)"; fi
+=======
+complete -C /home/goraxe/dotfiles/.asdf/installs/tanka/0.28.2/bin/tk tk
+>>>>>>> refs/remotes/origin/master

@@ -1,0 +1,56 @@
+#!/bin/sh
+set -eu
+
+TODOIST_CMD='flatpak run --env=XDG_CURRENT_DESKTOP=GNOME --command=todoist com.todoist.Todoist --password-store=gnome-libsecret'
+
+# Switch to the Todoist/focus workspace if a Todoist client already exists.
+awesome-client <<'EOF' >/dev/null 2>&1 || true
+for _, c in ipairs(client.get()) do
+  if c.class == 'todoist' then
+    local tags = c:tags()
+    local tag = tags[1]
+    if tag then
+      tag:view_only()
+    end
+    client.focus = c
+    c:raise()
+    return true
+  end
+end
+return false
+EOF
+
+# If no Todoist client exists yet, start it.
+if ! awesome-client 'for _, c in ipairs(client.get()) do if c.class == "todoist" then return true end end return false' 2>/dev/null | grep -q 'true'; then
+  sh -c "$TODOIST_CMD" >/dev/null 2>&1 &
+fi
+
+wid=''
+for _ in 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20; do
+  wid=$(awesome-client <<'EOF' 2>/dev/null | tr -d '[:space:]' || true
+for _, c in ipairs(client.get()) do
+  if c.class == 'todoist' then
+    return tostring(c.window)
+  end
+end
+return ''
+EOF
+)
+  case "$wid" in
+    ''|'nil') wid='' ;;
+    'string"'*'"') wid=$(printf '%s' "$wid" | sed -E 's/^string "(.*)"$/\1/') ;;
+  esac
+  if [ -n "$wid" ]; then
+    break
+  fi
+  sleep 0.25
+done
+
+if [ -z "$wid" ]; then
+  echo 'todoist-quick-add-focus: no Todoist client window found' >&2
+  exit 1
+fi
+
+xdotool windowactivate --sync "$wid" 2>/dev/null || true
+sleep 0.25
+xdotool type --clearmodifiers --delay 1 --window "$wid" 'q' 2>/dev/null
