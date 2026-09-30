@@ -11,8 +11,8 @@
 .vim/plugged
 *.bck
 zcompdump.*
-
+*.old
+bin/temp.sh
 
 # Added by cargo
-
 /target
