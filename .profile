@@ -110,12 +110,21 @@ if [[ -e "$HOME/.krew/bin" ]]; then
     export PATH="$PATH:$HOME/.krew/bin"
 fi
 
+if [[ -e "$HOME/.bun/bin" ]]; then
+    export PATH="$PATH:$HOME/.bun/bin"
+fi
+
 # make ls colors a little less garish
 export LS_COLORS="ow=41,37"
 
 # added by travis gem
 [ -f /home/goraxe/.travis/travis.sh ] && source /home/goraxe/.travis/travis.sh
 
-[ -f "$HOME/.asdf/asdf.sh" ] && source "$HOME/.asdf/asdf.sh"
+#[ -f "$HOME/.asdf/asdf.sh" ] && source "$HOME/.asdf/asdf.sh"
+[ -f "$HOME/.asdf/asdf.sh" ] && export PATH="$PATH:$HOME/.asdf/shims"
 
 [ -f "$HOME/.cargo/env" ] && source "$HOME/.cargo/env"
+
+export FLYCTL_INSTALL="/home/goraxe/.fly"
+export PATH="$FLYCTL_INSTALL/bin:$PATH"
+
