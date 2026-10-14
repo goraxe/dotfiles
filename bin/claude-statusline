@@ -1,0 +1,156 @@
+#!/usr/bin/env bash
+# Claude Code status line (~/bin/claude-statusline, kept in dotfiles; settings.json statusLine.command points here).
+# Runs under bash whatever shell launches it (zsh reserves $status, dash lacks ${x/#..}).
+# Also logs subscription usage (rate_limits, Pro/Max only, present after the first API response) to
+# ~/.claude/usage/rate-limits.jsonl, one line each time a value changes. Docs: code.claude.com/docs/en/statusline
+#
+# Styles (read on every render, so switching needs no restart):
+#   echo powerline > ~/.claude/statusline.style   # coloured blocks joined by  arrows (Nerd Font)  [default]
+#   echo pills     > ~/.claude/statusline.style   # coloured rounded capsules  (Nerd Font)
+#   echo plain     > ~/.claude/statusline.style   # coloured text, dim ❯ separators (any font)
+# CLAUDE_STATUSLINE_STYLE=<style> overrides the file for one session.
+input=$(cat)
+j() { jq -r "$1 // empty" <<<"$input"; }
+
+style=${CLAUDE_STATUSLINE_STYLE:-$(cat "$HOME/.claude/statusline.style" 2>/dev/null)}
+case "$style" in powerline | pills | plain) ;; *) style=powerline ;; esac
+
+cwd=$(j '.workspace.current_dir')
+session_name=$(j '.session_name')
+model=$(j '.model.display_name')
+ctx_used=$(j '.context_window.used_percentage')
+
+# 1. Subscription usage (display + log). Colour follows the weekly %: green, amber from 80, red from 90.
+usage=""; ulevel=ok
+h5=$(j '.rate_limits.five_hour.used_percentage')
+wk=$(j '.rate_limits.seven_day.used_percentage')
+wk_reset=$(j '.rate_limits.seven_day.resets_at')
+if [[ -n "$h5$wk" ]]; then
+  if [[ -n "$wk" ]]; then
+    w=$(printf '%.0f' "$wk")
+    usage="wk ${w}%"
+    (( w >= 80 )) && ulevel=warn
+    # U+26A0 + U+FE0F (emoji presentation selector): colour emoji, not the text glyph.
+    (( w >= 90 )) && ulevel=crit && usage=$'⚠️'" $usage"
+    [[ -n "$wk_reset" ]] && usage="$usage "$'\U0001F504'" $(date -d "@$wk_reset" '+%a %H:%M')"
+  fi
+  [[ -n "$h5" ]] && usage="${usage:+$usage · }5h $(printf '%.0f' "$h5")%"
+  log_dir="$HOME/.claude/usage"; log="$log_dir/rate-limits.jsonl"
+  mkdir -p "$log_dir"
+  rec=$(jq -c '{five_hour: .rate_limits.five_hour, seven_day: .rate_limits.seven_day,
+                context: (if .context_window.used_percentage then
+                            {used_pct: (.context_window.used_percentage | floor),
+                             tokens: .context_window.total_input_tokens,
+                             window: .context_window.context_window_size} else null end)}' <<<"$input")
+  # Dedupe on the rate limits and whole-number context %, not the exact token count (changes every response).
+  key=$(jq -c '{five_hour, seven_day, c: .context.used_pct}' <<<"$rec")
+  # Every session runs this (and re-runs it on refreshInterval), all appending to one log. Dedupe per session:
+  # a session logs only when its own snapshot changes, which happens after its API responses, not on timer
+  # ticks. (Comparing against the log's last line made two idle sessions with different snapshots alternate.)
+  # Appends are one short line each, so concurrent O_APPEND writes don't interleave.
+  sid=$(j '.session_id')
+  state="$log_dir/.last-${sid:-nosession}"
+  if [[ "$key" != "$(cat "$state" 2>/dev/null)" ]]; then
+    jq -c --argjson ts "$(date +%s)" --arg sid "$sid" --arg name "$session_name" --arg agent "$(j '.agent.name')" \
+      --arg project "${cwd##*/}" \
+      '{ts: $ts, session: $sid, name: $name, agent: $agent, project: $project} + .' <<<"$rec" >>"$log"
+    printf '%s' "$key" >"$state"
+  fi
+  # Drop state files of sessions idle for over a week.
+  find "$log_dir" -maxdepth 1 -name '.last-*' -mtime +7 -delete 2>/dev/null
+fi
+
+# 2. Model and context used (🧠)
+mdl="$model"
+ctx_tok=$(j '.context_window.total_input_tokens')
+if [[ -n "$ctx_used" ]]; then
+  mdl="$mdl "$'\U0001F9E0'" $(printf '%.0f' "$ctx_used")%"
+  [[ -n "$ctx_tok" && "$ctx_tok" != 0 ]] && mdl="$mdl·$(( (ctx_tok + 500) / 1000 ))k"
+fi
+
+# 3. Directory name and branch
+where="${cwd##*/}"
+if git -C "$cwd" rev-parse --git-dir >/dev/null 2>&1; then
+  branch=$(git -C "$cwd" -c core.useBuiltinFSMonitor=false -c core.fsmonitor=false branch --show-current 2>/dev/null)
+  [[ -n "$branch" ]] && where="$where  $branch"
+  [[ -n "$(git -C "$cwd" -c core.useBuiltinFSMonitor=false -c core.fsmonitor=false status --porcelain 2>/dev/null)" ]] && where="$where*"
+fi
+
+# 4. Kubernetes: short context (after '@') and namespace. kubectl is an asdf shim that prints the installed
+#    versions in a directory with no version set, so accept only a token that looks like a name.
+k8s=""
+if command -v kubectl &>/dev/null; then
+  kctx=$(cd "$cwd" 2>/dev/null && kubectl config current-context 2>/dev/null)
+  if [[ "$kctx" =~ ^[A-Za-z0-9@._:/-]+$ ]]; then
+    ns=$(cd "$cwd" 2>/dev/null && kubectl config view --minify --output 'jsonpath={..namespace}' 2>/dev/null)
+    [[ "$ns" =~ ^[a-z0-9.-]+$ ]] || ns=default
+    k8s=$'⛵'" ${kctx##*@}/$ns"
+  fi
+fi
+
+# 5. Session name
+sess="$session_name"
+
+# ---- rendering ----
+# Priority order (first = kept longest); segments drop from the end until the visible width fits $COLUMNS.
+texts=("$usage" "$mdl" "$where" "$k8s" "$sess")
+case "$ulevel" in ok) ubg=29 ufg=34 ;; warn) ubg=130 ufg=172 ;; crit) ubg=124 ufg=196 ;; esac
+# Model/context segment warns on context size (tokens re-read from cache on every request): amber from 300K,
+# red from 500K. Coordinators started with .claude/scripts/start-agent.sh auto-compact at 400K.
+mbg=25 mfg=33
+if [[ -n "$ctx_tok" ]]; then
+  (( ctx_tok >= 300000 )) && mbg=130 mfg=172
+  (( ctx_tok >= 500000 )) && mbg=124 mfg=196
+fi
+bgs=("$ubg" "$mbg" 28 31 238)   # block/capsule backgrounds (powerline, pills)
+bfg=(15 15 15 15 252)           # text on those backgrounds
+tfg=("$ufg" "$mfg" 70 37 245)   # text colours on the terminal's own background (plain)
+E=$'\e'; RST="${E}[0m"
+ARROW=$'' LCAP=$'' RCAP=$'' CHEV=$'❯'
+case "$style" in
+  powerline) per=3 ;;  # " text " + arrow
+  pills) per=5 ;;      # cap + " text " + cap + gap
+  plain) per=3 ;;      # " ❯ "
+esac
+cols=${COLUMNS:-200}
+n=${#texts[@]}
+while :; do
+  idx=(); plain=""
+  for ((i = 0; i < n; i++)); do
+    [[ -n "${texts[i]}" ]] || continue
+    idx+=("$i"); plain="$plain${texts[i]}"
+  done
+  # emoji are 2 columns but 1 character (U+FE0F adds a character but no column: harmless overcount)
+  wide=$(grep -o $'[⚠⛵\U0001F504\U0001F9E0]' <<<"$plain" | wc -l)
+  (( ${#plain} + wide + per * ${#idx[@]} <= cols - 4 || ${#idx[@]} <= 2 )) && break
+  n=$((n - 1))
+done
+
+out=""
+last=$(( ${#idx[@]} - 1 ))
+for ((k = 0; k <= last; k++)); do
+  i=${idx[k]}
+  case "$style" in
+    powerline)
+      out+="${E}[48;5;${bgs[i]}m${E}[38;5;${bfg[i]}m ${texts[i]} "
+      if (( k < last )); then
+        out+="${E}[38;5;${bgs[i]}m${E}[48;5;${bgs[${idx[k+1]}]}m$ARROW"
+      else
+        out+="$RST${E}[38;5;${bgs[i]}m$ARROW$RST"
+      fi
+      ;;
+    pills)
+      out+="${E}[38;5;${bgs[i]}m$LCAP${E}[48;5;${bgs[i]}m${E}[38;5;${bfg[i]}m ${texts[i]} $RST${E}[38;5;${bgs[i]}m$RCAP$RST"
+      (( k < last )) && out+=" "
+      ;;
+    plain)
+      out+="${E}[38;5;${tfg[i]}m${texts[i]}$RST"
+      (( k < last )) && out+=" ${E}[38;5;240m$CHEV$RST "
+      ;;
+  esac
+done
+printf '%s\n' "$out"
+# Last render, for debugging what Claude Code actually ran (overwritten each time).
+mkdir -p "$HOME/.claude/usage" 2>/dev/null
+{ echo "at=$(date '+%F %T') style=$style COLUMNS=${COLUMNS:-unset} parent=$(ps -o comm= -p $PPID 2>/dev/null) session=$(j '.session_id')"
+  printf '%s\n' "$out" | cat -v; } >"$HOME/.claude/usage/last-render.txt" 2>/dev/null
