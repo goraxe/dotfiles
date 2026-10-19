@@ -2,7 +2,9 @@
 # Claude Code status line (~/bin/claude-statusline, kept in dotfiles; settings.json statusLine.command points here).
 # Runs under bash whatever shell launches it (zsh reserves $status, dash lacks ${x/#..}).
 # Also logs subscription usage (rate_limits, Pro/Max only, present after the first API response) to
-# ~/.claude/usage/rate-limits.jsonl, one line each time a value changes. Docs: code.claude.com/docs/en/statusline
+# ~/.claude/usage/rate-limits.jsonl (or $CLAUDE_USAGE_DIR), one line each time a value changes. Docs: code.claude.com/docs/en/statusline
+# CLAUDE_USAGE_DIR=<dir> moves the usage log, its per-session state and last-render.txt (mh agent sessions point it at a
+# directory shared with the host, since their $HOME is the agent's own).
 #
 # Styles (read on every render, so switching needs no restart):
 #   echo powerline > ~/.claude/statusline.style   # coloured blocks joined by  arrows (Nerd Font)  [default]
@@ -10,6 +12,7 @@
 #   echo plain     > ~/.claude/statusline.style   # coloured text, dim ❯ separators (any font)
 # CLAUDE_STATUSLINE_STYLE=<style> overrides the file for one session.
 input=$(cat)
+usage_dir=${CLAUDE_USAGE_DIR:-$HOME/.claude/usage}
 j() { jq -r "$1 // empty" <<<"$input"; }
 
 style=${CLAUDE_STATUSLINE_STYLE:-$(cat "$HOME/.claude/statusline.style" 2>/dev/null)}
@@ -35,7 +38,7 @@ if [[ -n "$h5$wk" ]]; then
     [[ -n "$wk_reset" ]] && usage="$usage "$'\U0001F504'" $(date -d "@$wk_reset" '+%a %H:%M')"
   fi
   [[ -n "$h5" ]] && usage="${usage:+$usage · }5h $(printf '%.0f' "$h5")%"
-  log_dir="$HOME/.claude/usage"; log="$log_dir/rate-limits.jsonl"
+  log_dir="$usage_dir"; log="$log_dir/rate-limits.jsonl"
   mkdir -p "$log_dir"
   rec=$(jq -c '{five_hour: .rate_limits.five_hour, seven_day: .rate_limits.seven_day,
                 context: (if .context_window.used_percentage then
@@ -151,6 +154,6 @@ for ((k = 0; k <= last; k++)); do
 done
 printf '%s\n' "$out"
 # Last render, for debugging what Claude Code actually ran (overwritten each time).
-mkdir -p "$HOME/.claude/usage" 2>/dev/null
+mkdir -p "$usage_dir" 2>/dev/null
 { echo "at=$(date '+%F %T') style=$style COLUMNS=${COLUMNS:-unset} parent=$(ps -o comm= -p $PPID 2>/dev/null) session=$(j '.session_id')"
-  printf '%s\n' "$out" | cat -v; } >"$HOME/.claude/usage/last-render.txt" 2>/dev/null
+  printf '%s\n' "$out" | cat -v; } >"$usage_dir/last-render.txt" 2>/dev/null
